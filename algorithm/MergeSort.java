@@ -1,5 +1,5 @@
 import java.util.Arrays;
-// 使用递归
+
 public class MergeSort {
 
     public static void mergeSort(int[] arr){
