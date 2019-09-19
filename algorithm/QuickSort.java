@@ -21,7 +21,7 @@ public class QuickSort {
         int less = l - 1;
         int more = r + 1;
         int p = l;
-        int temp = arr[r];
+        int temp = arr[l + (int)(Math.random() * (r - l + 1))];
         while(p < more){
             if (arr[p] < temp){
                 swap(arr,++less,p++);
