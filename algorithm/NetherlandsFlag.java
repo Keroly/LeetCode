@@ -1,4 +1,4 @@
-import java.util.Arrays;
+// 给定一个数组,以该数组的最后一个数字temp为标准,把数组划分为三部分：小于temp 等于temp 大于temp
 
 public class NetherlandsFlag {
 
