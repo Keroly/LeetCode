@@ -1,3 +1,5 @@
+//冒泡排序  时间复杂度O(N^2) 额外空间复杂度O(1)
+
 import java.util.Arrays;
 
 public class BubbleSort {
