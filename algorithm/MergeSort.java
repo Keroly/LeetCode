@@ -1,3 +1,13 @@
+//归并排序  时间复杂度O(N*logN)  额外空间复杂度O(N）
+/* 剖析递归行为和递归行为时间复杂度的估算
+一个递归行为的例子
+master公式的使用
+T(N) = a*T(N/b) + O(N^d)
+1) log(b,a) > d -> 复杂度为O(N^log(b,a))
+2) log(b,a) = d -> 复杂度为O(N^d * logN)
+3) log(b,a) < d -> 复杂度为O(N^d)
+*/
+
 import java.util.Arrays;
 
 public class MergeSort {
