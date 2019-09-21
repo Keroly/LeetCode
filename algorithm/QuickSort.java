@@ -1,3 +1,5 @@
+//快速排序 时间复杂度O(N*logN) 额外空间复杂度O(logN)
+
 import java.util.Arrays;
 
 public class QuickSort {
