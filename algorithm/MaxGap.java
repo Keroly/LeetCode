@@ -3,7 +3,7 @@
 public class MaxGap {
 
     // only for 0~200 value
-    public static void bucketSort(int[] arr){
+    public static void MaxGap(int[] arr){
         if (arr.length < 2 || arr == null){
             return;
         }
@@ -45,7 +45,7 @@ public class MaxGap {
 
         int[] arr = {0,200,24,68,21,3,6,9,72,6,3,2,24,87,36,7,12,125,3,57,158};
         printArray(arr);
-        bucketSort(arr);
+        MaxGap(arr);
         printArray(arr);
     }
 }
