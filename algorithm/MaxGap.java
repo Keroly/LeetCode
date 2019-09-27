@@ -1,36 +1,98 @@
 // 给定一个数组,要求计算出该数组排序后,相邻两数字的最大差值
 
+import java.util.Arrays;
+
 public class MaxGap {
 
-    public static void MaxGap(int[] arr){
-        if (arr.length < 2 || arr == null){
-            return;
+    public static int maxGap(int[] nums) {
+        if (nums == null || nums.length < 2) {
+            return 0;
         }
+        int len = nums.length;
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < len; i++) {
+            min = Math.min(min, nums[i]);
+            max = Math.max(max, nums[i]);
+        }
+        if (min == max) {
+            return 0;
+        }
+        boolean[] hasNum = new boolean[len + 1];
+        int[] maxs = new int[len + 1];
+        int[] mins = new int[len + 1];
+        int bid = 0;
+        for (int i = 0; i < len; i++) {
+            bid = bucket(nums[i], len, min, max);
+            mins[bid] = hasNum[bid] ? Math.min(mins[bid], nums[i]) : nums[i];
+            maxs[bid] = hasNum[bid] ? Math.max(maxs[bid], nums[i]) : nums[i];
+            hasNum[bid] = true;
+        }
+        int res = 0;
+        int lastMax = maxs[0];
+        int i = 1;
+        for (; i <= len; i++) {
+            if (hasNum[i]) {
+                res = Math.max(res, mins[i] - lastMax);
+                lastMax = maxs[i];
+            }
+        }
+        return res;
     }
 
-
-    public static void swap(int[] arr,int i,int j){
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+    public static int bucket(long num, long len, long min, long max) {
+        return (int) ((num - min) * len / (max - min));
     }
 
-
-    public static void printArray(int[] arr){
-        if (arr == null){
-            return;
+    // for test
+    public static int comparator(int[] nums) {
+        if (nums == null || nums.length < 2) {
+            return 0;
         }
-        for (int i = 0; i < arr.length; i++){
-            System.out.print(arr[i] + " ");
+        Arrays.sort(nums);
+        int gap = Integer.MIN_VALUE;
+        for (int i = 1; i < nums.length; i++) {
+            gap = Math.max(nums[i] - nums[i - 1], gap);
         }
-        System.out.println();
+        return gap;
     }
 
+    // for test
+    public static int[] generateRandomArray(int maxSize, int maxValue) {
+        int[] arr = new int[(int) ((maxSize + 1) * Math.random())];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int) ((maxValue + 1) * Math.random()) - (int) (maxValue * Math.random());
+        }
+        return arr;
+    }
+
+    // for test
+    public static int[] copyArray(int[] arr) {
+        if (arr == null) {
+            return null;
+        }
+        int[] res = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            res[i] = arr[i];
+        }
+        return res;
+    }
+
+    // for test
     public static void main(String[] args) {
-
-        int[] arr = {0,200,24,68,21,3,6,9,72,6,3,2,24,87,36,7,12,125,3,57,158};
-        printArray(arr);
-        MaxGap(arr);
-        printArray(arr);
+        int testTime = 500000;
+        int maxSize = 100;
+        int maxValue = 100;
+        boolean succeed = true;
+        for (int i = 0; i < testTime; i++) {
+            int[] arr1 = generateRandomArray(maxSize, maxValue);
+            int[] arr2 = copyArray(arr1);
+            if (maxGap(arr1) != comparator(arr2)) {
+                succeed = false;
+                break;
+            }
+        }
+        System.out.println(succeed ? "Nice!" : "False");
     }
+
 }
