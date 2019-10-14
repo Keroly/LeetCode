@@ -1,4 +1,4 @@
-
+// 使用数组模拟栈和队列
 public class C3_Array_To_Stack_Queue {
 
     public static class ArrayStack{
