@@ -1,4 +1,4 @@
-//快速排序 时间复杂度O(N*logN) 额外空间复杂度O(logN)
+//随机快速排序 时间复杂度O(N*logN) 额外空间复杂度O(logN)
 
 import java.util.Arrays;
 
@@ -13,28 +13,28 @@ public class C1_QuickSort {
 
     private static void sortProcess(int[] arr, int l, int r) {
         if (l < r) {
+            swap(arr, l + (int)(Math.random() * (r - l + 1)), r);
             int[] index = partition(arr,l,r);
             sortProcess(arr,l,index[0] - 1);
             sortProcess(arr,index[1] + 1,r);
         }
     }
 
-    public static int[] partition(int[] arr, int l, int r){
+    public static int[] partition(int[] arr,int l, int r){
         int less = l - 1;
-        int more = r + 1;
-        int p = l;
-        int temp = arr[l + (int)(Math.random() * (r - l + 1))];
-        while(p < more){
-            if (arr[p] < temp){
-                swap(arr,++less,p++);
-            }else if (arr[p] > temp){
-                swap(arr,--more,p);
-            }else {
-                p++;
+        int more = r;
+
+        while(l < more){
+            if(arr[l] < arr[r]){
+                swap(arr, ++less, l++); // 这里的 ++  很有必要
+            }else if (arr[l] > arr[r]){
+                swap(arr,--more,l);
+            }else{
+                l++;
             }
         }
-
-        return new int[] {less + 1, more - 1};
+        swap(arr,more,r);
+        return new int[] {less + 1, more};
     }
 
     public static void swap(int[] arr,int i,int j){
