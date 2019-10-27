@@ -1,4 +1,4 @@
-// 给定一个数组,对于数组中的每个元素,找出位于他的左边&&比它小的元素并求和,累加
+// 给定一个数组,对于数组中的每个元素,找出位于他的左边&&比它小的元素并求和,再累加
 public class C1_SmallSum {
 
     public static int smallSum(int[] arr){
