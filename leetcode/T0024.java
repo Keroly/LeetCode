@@ -1,7 +1,3 @@
-import sun.plugin.javascript.navig.LinkArray;
-
-import java.util.Stack;
-
 /*
 给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。
 
@@ -22,28 +18,37 @@ public class T0024 {
         }
     }
 
-    public static ListNode swapPairs(ListNode head) {
-        if (head == null || head.next == null)
+    public static ListNode swapPairs(ListNode head) {   // 递归
+        if(head == null || head.next == null){
             return head;
-        ListNode node = head.next;
-        ListNode start = head;
-        ListNode first = null;
-        ListNode help = null;
-        while (start != null && start.next != null){
-            first = start;
-            start = start.next.next;
-            first.next.next = first;
-            if(start != null && start.next != null)
-                first.next = start.next;
-            else
-                first.next = start;
         }
-        return node;
+        ListNode next = head.next;
+        head.next = swapPairs(next.next);
+        next.next = head;
+        return next;
     }
 
-    public static void main(String[] args) {
-        ListNode node = null;
+//    public ListNode swapPairs(ListNode head) {   // 非递归
+//        ListNode pre = new ListNode(0);
+//        pre.next = head;
+//        ListNode temp = pre;
+//        while(temp.next != null && temp.next.next != null) {
+//            ListNode start = temp.next;
+//            ListNode end = temp.next.next;
+//            temp.next = end;
+//            start.next = end.next;
+//            end.next = start;
+//            temp = start;
+//        }
+//        return pre.next;
+//    }
 
+
+    public static void main(String[] args) {
+        ListNode node = new ListNode(1);
+        node.next = new ListNode(2);
+        node.next.next = new ListNode(3);
+        node.next.next.next = new ListNode(4);
         node = swapPairs(node);
         while (node != null){
             System.out.println(node.val);
