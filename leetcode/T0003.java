@@ -38,7 +38,7 @@ public class T0003 {
     }
 
     public static void main(String[] args) {
-        String str = "abba";
+        String str = "abb";
         System.out.println(lengthOfLongestSubstring(str));
     }
 }
