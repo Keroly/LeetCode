@@ -20,35 +20,25 @@
  */
 
 import java.util.HashMap;
-import java.util.LinkedList;
 public class T0003 {
     public static int lengthOfLongestSubstring(String s) {
         if (s == "") return 0;
-        LinkedList<Character> list = new LinkedList<Character>();
         HashMap<Character,Integer> map = new HashMap<Character,Integer>();
         char[] arr = s.toCharArray();
         int res = 0;
+        int j = 0;
         for (int i = 0; i < arr.length; i++) {
-            if (!map.containsKey(arr[i])){
-                list.addLast(arr[i]);
-                map.put(arr[i],i);
-            }else {
-                while (list.getFirst() != arr[i]){
-                    res = res > list.size() ? res : list.size();
-                    map.remove(list.peekFirst());
-                    list.pollFirst();
-                }
-                map.remove(list.peekFirst());
-                list.pollFirst();
-                list.addLast(arr[i]);
-                map.put(arr[i],i);
+            if (map.containsKey(arr[i])){
+                j =  Math.max(map.get(arr[i]) + 1 , j) ;
             }
+            res = res > i - j + 1 ? res : i - j + 1;
+            map.put(arr[i],i);
         }
-        return res > list.size() ? res : list.size();
+        return res > arr.length - j ? res : arr.length -j;
     }
 
     public static void main(String[] args) {
-        String str = "aac";
+        String str = "abba";
         System.out.println(lengthOfLongestSubstring(str));
     }
 }
