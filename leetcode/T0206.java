@@ -15,21 +15,16 @@ public class T0206 {
        ListNode next;
        ListNode(int x) { val = x; }
     }
-    static ListNode start = null;
-    public static ListNode process(ListNode node){
-        if (node.next == null){
-            start = node;
-            return node;
-        }
-        process(node.next).next = node;
-        return node;
-    }
 
+    static ListNode  start ;
     public static ListNode reverseList(ListNode head) {
-        if(head == null || head.next == null) return head;
-        process(head);
-        head.next = null;
-        return start;
+        if (head == null || head.next == null) return start;
+
+        ListNode temp = head.next.next;
+        head.next.next = head;
+        reverseList(temp).next = head.next;
+
+        return head;
     }
 
     public static void main(String[] args) {
@@ -39,9 +34,9 @@ public class T0206 {
         node.next.next.next = new ListNode(4);
         node.next.next.next.next = new ListNode(5);
         node = reverseList(node);
-        while (node != null){
-            System.out.println(node.val);
-            node = node.next;
+        while (start.next != null){
+            System.out.println(start.next.val);
+            start = start.next;
         }
     }
 }
