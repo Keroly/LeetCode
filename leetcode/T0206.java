@@ -16,16 +16,20 @@ public class T0206 {
        ListNode(int x) { val = x; }
     }
 
-    static ListNode  start ;
-    public static ListNode reverseList(ListNode head) {
-        if (head == null || head.next == null) return start;
-
-        ListNode temp = head.next.next;
-        head.next.next = head;
-        reverseList(temp).next = head.next;
-
-        return head;
+    public static ListNode reverseList(ListNode head) { // 迭代 O(N) O(1)
+        if (head == null || head.next == null) return head;
+        ListNode temp = null;
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null){
+            temp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = temp;
+        }
+        return pre;
     }
+
 
     public static void main(String[] args) {
         ListNode node = new ListNode(1);
@@ -34,9 +38,9 @@ public class T0206 {
         node.next.next.next = new ListNode(4);
         node.next.next.next.next = new ListNode(5);
         node = reverseList(node);
-        while (start.next != null){
-            System.out.println(start.next.val);
-            start = start.next;
+        while (node != null){
+            System.out.println(node.val);
+            node = node.next;
         }
     }
 }
