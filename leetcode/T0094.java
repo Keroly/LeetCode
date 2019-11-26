@@ -37,11 +37,11 @@ public class T0094 {
                 stack.push(head);
                 head = head.left;
             }else {
-                head = stack.pop();
-                list.add(head.val);
-                head = head.right;
+                TreeNode top = stack.pop();
+                list.add(top.val);
+                head = top.right;
+                }
             }
-        }
         return list;
     }
 }
