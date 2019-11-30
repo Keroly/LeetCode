@@ -24,7 +24,7 @@ public class B04 {
             if (in[j] == pre[prei]){
                 TreeNode node = new TreeNode(pre[prei]); // pre[prei] 先序数组中的第一个
                 node.left = process(prei + 1, prei + j - ini, ini, j - 1, pre, in);
-                node.right = process(prei + j - ini + 1, prej,j + 1, inj, pre, in);
+                node.right = process(prei + j - ini + 1, prej, j + 1, inj, pre, in);
                 return node;
             }
         }
