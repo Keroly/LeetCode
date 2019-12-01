@@ -34,6 +34,8 @@ public class B12 {
         ListNode node = new ListNode( 1);
         node.next = new ListNode(2);
         node = FindKthToTail(node,3);
-        System.out.println(node.val);
+        if (node != null){
+            System.out.println(node.val);
+        }
     }
 }
