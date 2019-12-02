@@ -8,8 +8,7 @@
 import java.util.HashSet;
 public class B15 {
     public static boolean duplicate(int numbers[],int length,int [] duplication) { // 因为题目特殊，所以有这种时间复杂度O(n) 空间复杂度O(1)的算法
-        int i = 0;
-        for (i = 0; i < length; i++) {
+        for (int i = 0; i < length; i++) {
             if (numbers[i] == numbers[numbers[i]] && numbers[i] != i){ // 数字i 等于 索引为i的位置上的数，但是数字i本身不在索引i上
                 duplication[0] = numbers[i];
                 return true;
