@@ -7,6 +7,19 @@
 import java.util.Stack;
 
 public class B11 {
+//    public static void reOrderArray(int [] array) { // 时间复杂度O(n^2) 空间复杂度O(1)  插入排序
+//        int num = 0;
+//        for (int i = 0; i < array.length; i++) {
+//            if (array[i] % 2 == 1){
+//                for (int j = i; j > num; j--){
+//                    int temp = array[j];
+//                    array[j] = array[j - 1];
+//                    array[j - 1] = temp;
+//                }
+//                num++;
+//            }
+//        }
+//    }
     public static void reOrderArray(int [] array) { // 时间复杂度O(n) 空间复杂度O(n)
         Stack<Integer> stack1 = new Stack<>();
         Stack<Integer> stack2 = new Stack<>();
