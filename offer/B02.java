@@ -5,24 +5,28 @@
  */
 public class B02 {
     public static String replaceSpace(StringBuffer str) {
-        char[] array = str.toString().toCharArray();
+        char[] arr = str.toString().toCharArray();
         int count = 0;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == ' '){
+
+        for (int i = arr.length - 1; i >= 0; i--){
+            if (arr[i] == ' '){
                 count++;
             }
         }
-        char[] result = new char[array.length + 2 * count];
-        for (int i = array.length - 1, j = array.length + 2 * count - 1; i >= 0 && j >= 0; i--,j--) {
-            if (array[i] != ' '){
-                result[j] = array[i];
+
+        char[] arr_new = new char[arr.length + 2 * count];
+
+        for (int i = arr.length - 1, j = arr.length + 2 * count - 1; i >= 0 && j >= 0; i--, j--){
+            if (arr[i] == ' '){
+                arr_new[j--] = '0';
+                arr_new[j--] = '2';
+                arr_new[j] = '%';
             }else {
-                result[j--] = '0';
-                result[j--] = '2';
-                result[j] = '%';
+                arr_new[j] = arr[i];
             }
         }
-        return String.valueOf(result);
+
+        return String.valueOf(arr_new);
     }
 
     public static void main(String[] args) {
