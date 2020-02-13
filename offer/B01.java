@@ -8,15 +8,13 @@
 
 public class B01 {
     public static boolean Find(int target, int [][] array) {
-        int weight = array[0].length; // 几列
-        int hight = array.length; // 几行
-        int horizontal = 0; // 行号
-        int vertical = weight - 1; // 列号
-        while (horizontal < hight && vertical >= 0){
-            if (array[horizontal][vertical] < target){
-                horizontal++;
-            }else if (array[horizontal][vertical] > target){
-                vertical--;
+        int x = 0;
+        int y = array[0].length - 1;
+        while (x < array.length && y > -1){
+            if (target < array[x][y]){
+                y -= 1;
+            }else if (target > array[x][y]){
+                x += 1;
             }else {
                 return true;
             }
@@ -26,6 +24,6 @@ public class B01 {
 
     public static void main(String[] args) {
         int[][] array = {{1,2,3,4},{5,6,7,8},{9,10,11,12}};
-        System.out.println(Find(13, array));
+        System.out.println(Find(7, array));
     }
 }
