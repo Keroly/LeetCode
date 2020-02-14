@@ -16,17 +16,13 @@ public class B03 {
         }
     }
 
-    static ArrayList<Integer> list = new ArrayList();
+    static ArrayList<Integer> list = new ArrayList<Integer>();
 
     public static ArrayList<Integer> printListFromTailToHead(ListNode listNode) { // 递归
-        if (listNode == null || listNode.next == null){
-            if (listNode != null){
-                list.add(listNode.val);
-            }
-            return list;
+        if (listNode != null) {
+            printListFromTailToHead(listNode.next);
+            list.add(listNode.val);
         }
-        printListFromTailToHead(listNode.next);
-        list.add(listNode.val);
         return list;
     }
 
