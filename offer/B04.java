@@ -4,8 +4,6 @@
 输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。
 假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。
  */
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 public class B04 {
@@ -17,14 +15,14 @@ public class B04 {
     }
 
     public static TreeNode process(int prei, int prej, int ini, int inj, int [] pre,int [] in){
-        if(ini > inj){ // 当中序遍历数组中头部索引大于尾部索引结束本次递归
+        if (ini > inj){
             return null;
         }
-        for (int j = ini; j <= inj; j++) {
-            if (in[j] == pre[prei]){
-                TreeNode node = new TreeNode(pre[prei]); // pre[prei] 先序数组中的第一个
-                node.left = process(prei + 1, prei + j - ini, ini, j - 1, pre, in);
-                node.right = process(prei + j - ini + 1, prej, j + 1, inj, pre, in);
+        for (int i = ini; i <= inj; i++){
+            if (pre[prei] == in[i]){
+                TreeNode node = new TreeNode(pre[prei]);
+                node.left = process(prei + 1, prei + i - ini, ini, i - 1, pre, in);
+                node.right = process(prei + i - ini + 1, prej, i + 1, inj, pre, in);
                 return node;
             }
         }
@@ -43,21 +41,23 @@ public class B04 {
         int[] in = {4,7,2,1,5,3,8,6};
         TreeNode node = reConstructBinaryTree(pre, in);
 
-        List<Integer> list = new ArrayList<Integer>();
         Stack<TreeNode> stack = new Stack<TreeNode>();
+        Stack<TreeNode> stack_2 = new Stack<TreeNode>();
+
         stack.push(node);
         while (!stack.isEmpty()){
             TreeNode top = stack.pop();
-            list.add(top.val);
-            if (top.right != null){
-                stack.push(top.right);
-            }
+            stack_2.push(top);
             if (top.left != null){
                 stack.push(top.left);
             }
+            if (top.right != null){
+                stack.push(top.right);
+            }
         }
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
+
+        while (!stack_2.isEmpty()){
+            System.out.print(stack_2.pop().val + " ");  // 7 4 2 5 8 6 3 1
         }
     }
 }
