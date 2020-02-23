@@ -15,9 +15,7 @@ public class B05 {
     }
 
     public int pop() {
-        if (!stack2.isEmpty()){
-
-        }else {
+        if (stack2.isEmpty()){
             while (!stack1.isEmpty()){
                 stack2.push(stack1.pop());
             }
