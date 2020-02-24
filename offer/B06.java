@@ -8,20 +8,23 @@ NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
  */
 
 public class B06 {
-    public static int minNumberInRotateArray(int [] array) {
+    public static int minNumberInRotateArray(int [] array) { // 错误的mid位置,往左侧看应当大于low位置，否则往右侧看赢小于等于high位置
         if (array.length == 0) return 0;
         int low = 0;
+        int mid = (array.length - 1) >> 1;
         int high = array.length - 1;
-        int mid = 0;
-        while(low < high){
-            if (array[low] < array[high]) // 如果array本身就是排好序的
+        while (low < high){
+            if (array[low] < array[high]){
                 return array[low];
+            }
             mid = low + (high - low) / 2;
-            if(array[mid] > array[low]) // low 向右移动
-                low = mid + 1; // 如果mid属于左侧，那么mid可以直接排除，因为答案一定在右侧
-            else if(array[mid] < array[high]) // high 向左移动
-                high = mid; // 如果mid属于右侧，那么mid不可以排除，因为答案一定在右侧
-            else low++; // 如果array[mid]等于array[low / high]中的任何一个都把low右移重新计算mid，因为如果low位置是唯一答案应该早已被判断出  1234 / 1111
+            if (array[mid] > array[low]){
+                low = mid;
+            }else if (array[mid] < array[high]){
+                high = mid;
+            }else {     // 不存在 mid 比 low 小的同时比 high 大, 唯一的可能就是 mid 与任意一端的值相等
+                low++;  // 由于low >= high 且 mid与任意一端相等，自然可以使 low 右移
+            }
         }
         return array[low];
     }
