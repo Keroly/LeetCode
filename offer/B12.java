@@ -14,26 +14,30 @@ public class B12 {
     }
 
     public static ListNode FindKthToTail(ListNode head,int k) {
-        if (head == null || head.next == null) return head;
-        if (k <= 0) return null;
-        ListNode node;
-        ListNode start = head;
-        ListNode end = head;
-        while (k-- > 1){
-            end = end.next;
-            if (end == null) return null;
-        }
-        while (end.next != null){
-            start = start.next;
-            end = end.next;
-        }
-        return start;
+         if (head == null || k <= 0) return null;
+         ListNode start = head;
+         ListNode end = head;
+
+         for (int i = 1; i < k; i++){
+             end = end.next;
+         }
+
+         while (end != null && end.next != null){
+             end = end.next;
+             start = start.next;
+         }
+
+         if (end == null) return end;
+
+         return start;
     }
 
     public static void main(String[] args) {
         ListNode node = new ListNode( 1);
         node.next = new ListNode(2);
-        node = FindKthToTail(node,3);
+        node.next.next = new ListNode(3);
+        node.next.next.next = new ListNode(4);
+        node = FindKthToTail(node,1);
         if (node != null){
             System.out.println(node.val);
         }
