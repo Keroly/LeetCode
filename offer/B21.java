@@ -15,17 +15,28 @@ public class B21 {
     }
 
     public static boolean IsSame(TreeNode root1,TreeNode root2){
-        if (root1 == null && root2 == null) return true;
-        if (root1 == null) return false;
         if (root2 == null) return true;
-        if (root1.val != root2.val) return false;
-        boolean flag = true;
-        return IsSame(root1.left, root2.left) && IsSame(root1.right, root2.right);
+        if (root1 == null) return false;
+        if (root1.val == root2.val) return IsSame(root1.left, root2.left) && IsSame(root1.right, root2.right);
+        return false;
     }
 
     public static boolean HasSubtree(TreeNode root1,TreeNode root2) {
-        if (root1 == null || root2 == null) return false;
-        return IsSame(root1,root2)  || HasSubtree(root1.left, root2) || HasSubtree(root1.right, root2);
+        boolean result = false;
+        if (root1 != null && root2 != null) {
+            if (root1.val == root2.val){
+                result = IsSame(root1, root2);
+            }
+
+            if (!result){
+                result = HasSubtree(root1.left, root2);
+            }
+
+            if (!result){
+                result = HasSubtree(root1.right, root2);
+            }
+        }
+        return result;
     }
 
     public static void main(String[] args) {
@@ -38,7 +49,7 @@ public class B21 {
         root1.left.right.right = new TreeNode(7);
         TreeNode root2 = new TreeNode(8);
         root2.left = new TreeNode(9);
-        root2.right = new TreeNode(2);
+        root2.right = new TreeNode(3);
         System.out.println(HasSubtree(root1,root2));
     }
 }
