@@ -14,17 +14,14 @@ public class B13 {
     }
 
     public static ListNode node;
-
     public static ListNode process(ListNode head){
-        if (head == null || head.next == null) {
-            if (head.next == null){
-                node = head;
-                return head;
-            }
+        if (head.next == null) {
+            node = head;
+            return head;
         }
-        process(head.next).next = head;
-        head.next.next = head;
+        ListNode temp = head.next;
         head.next = null;
+        process(temp).next = head;
         return head;
     }
 
