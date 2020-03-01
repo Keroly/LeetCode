@@ -11,17 +11,20 @@ import java.util.Stack;
 
 public class B23 {
     public static boolean IsPopOrder(int [] pushA,int [] popA) {
-        if (pushA.length == 0) return false;
-        Stack<Integer> stack = new Stack<>();
-        int k = 0;
-        for (int i = 0; i < pushA.length; i++) {
-            stack.push(pushA[i]);
-            while (!stack.isEmpty() && stack.peek() == popA[k]){
-                stack.pop();
-                k++;
+        if (pushA.length != popA.length || pushA.length == 0) return false;
+        Stack<Integer> stack = new Stack<Integer>();
+        int i = 0;
+        int j = 0;
+        stack.push(pushA[i++]);
+        while(j < popA.length){
+            while(popA[j] != stack.peek()){
+                if(i == pushA.length) return false; // 失败的条件：push数组遍历完了，不能再出现栈顶与pop不相等的情况
+                stack.push(pushA[i++]);
             }
+            j++;
+            stack.pop();
         }
-        return stack.isEmpty();
+        return true;
     }
 
     public static void main(String[] args) {
