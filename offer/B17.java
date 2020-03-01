@@ -13,13 +13,12 @@ public class B17 {
         }
     }
     public void Mirror(TreeNode root) {
-        if (root == null){
-            return;
-        }
-        TreeNode node = root.left;
-        root.left = root.right;
-        root.right = node;
-        Mirror(root.left);
-        Mirror(root.right);
+        if (root == null) return;
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+        root.left = right;
+        root.right = left;
+        Mirror(left);
+        Mirror(right);
     }
 }
