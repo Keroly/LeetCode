@@ -10,9 +10,8 @@ public class B22 {
     static Stack<Integer> min = new Stack();
     public static void push(int node) {
         data.push(node);
-        if (min.isEmpty()){
-            min.push(node);
-        }else if (node < min.peek()){
+        if (min.isEmpty()) min.push(node);
+        if (node < min.peek()){
             min.push(node);
         }else {
             min.push(min.peek());
@@ -20,20 +19,23 @@ public class B22 {
     }
 
     public static void pop() {
-        if (!data.isEmpty()){
+        if (!data.isEmpty() && !min.isEmpty()){
             data.pop();
             min.pop();
         }
     }
 
     public static int top() {
-        if (!data.isEmpty())
+        if (!data.isEmpty()){
             return data.peek();
+        }
         return -1;
     }
 
     public static int min() {
-        if (!min.isEmpty()) return min.peek();
+        if (!min.isEmpty()){
+            return min.peek();
+        }
         return -1;
     }
 
@@ -44,7 +46,6 @@ public class B22 {
         stack.push(1);
         stack.push(2);
         stack.push(2);
-        stack.pop();
         stack.pop();
         stack.pop();
         System.out.println(B22.min());
