@@ -7,71 +7,43 @@
 
 import java.util.ArrayList;
 public class B18 {
-    public static ArrayList<Integer> printMatrix(int [][] matrix) { // 矩阵解法
+    public static ArrayList<Integer> printMatrix(int [][] matrix) { // 矩阵通用解法
         ArrayList<Integer> list = new ArrayList();
         int calm_size = matrix.length;
         int vertical_size = matrix[0].length;
         int i = -1;
         int j = -1;
-        while (calm_size > 0 && vertical_size > 0){
+        while (calm_size > 0 && vertical_size >0){
             i++;
             j++;
-            int calm_flag = 0;
-            int vertical_flag = 0;
-            if (calm_size == 1 && vertical_size == 1){
-                list.add(matrix[i][j]);
-                break;
+            while (calm_size == 1 && vertical_size > 0 ){
+                list.add(matrix[i][j++]);
+                vertical_size--;
             }
-            for (int k = 0; k < vertical_size - 1; k++){
-                list.add(matrix[i][j + k]);
-                calm_flag = 1;
+            while (calm_size > 0 && vertical_size == 1){
+                list.add(matrix[i++][j]);
+                calm_size--;
             }
-            for (int k = 0; k < calm_size - 1; k++){
-                list.add(matrix[i + k][j + vertical_size - 1]);
-                vertical_flag = 1;
+            if (calm_size > 0 && vertical_size >0){
+                for (int k = 0; k < vertical_size - 1; k++){
+                    list.add(matrix[i][j + k]);
+                }
+                for (int k = 0; k < calm_size - 1; k++){
+                    list.add(matrix[i + k][j + vertical_size - 1]);
+                }
+                for (int k = 0; k < vertical_size - 1; k++){
+                    list.add(matrix[i + calm_size - 1][j + vertical_size - 1 - k]);
+                }
+                for (int k = 0; k < calm_size - 1; k++){
+                    list.add(matrix[i + calm_size - 1 - k][j]);
+                }
             }
-            for (int k = 0; k < vertical_size - 1; k++){
-                list.add(matrix[i + calm_size - 1][j + vertical_size - 1 - k]);
-                if (vertical_flag == 0) break;
-            }
-            for (int k = 0; k < calm_size - 1; k++){
-                list.add(matrix[i + calm_size - 1 - k][j]);
-                if (calm_flag == 0) break;
-            }
-            calm_size = calm_size - 2;
-            vertical_size = vertical_size - 2;
+            calm_size -= 2;
+            vertical_size -= 2;
         }
         return list;
     }
 
-//    public static ArrayList<Integer> printMatrix(int [][] matrix) { // 方阵解法
-//        ArrayList<Integer> list = new ArrayList();
-//        int size = matrix.length;
-//        int i = -1;
-//        int j = -1;
-//        while (size > 0){
-//            i++;
-//            j++;
-//            if (size == 1){
-//                list.add(matrix[i][j]);
-//                break;
-//            }
-//            for (int k = 0; k < size - 1; k++){
-//                list.add(matrix[i][j + k]);
-//            }
-//            for (int k = 0; k < size - 1; k++){
-//                list.add(matrix[i + k][j + size - 1]);
-//            }
-//            for (int k = 0; k < size - 1; k++){
-//                list.add(matrix[i + size - 1][j + size - 1 - k]);
-//            }
-//            for (int k = 0; k < size - 1; k++){
-//                list.add(matrix[i + size - 1 - k][j]);
-//            }
-//            size = size - 2;
-//        }
-//        return list;
-//    }
 
     public static void main(String[] args) {
         int[][] matrix = {{1,2,3},{4,5,6},{7,8,9},{10,11,12}};
