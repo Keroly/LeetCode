@@ -5,23 +5,25 @@
  */
 public class B24 {
     public static boolean process(int [] sequence, int i, int j){
-        if (i == j) return true;
-        int flag = sequence[j];
-        int k = 0;
-        for (k = i; k < j; k++) {
-            if (sequence[k] > flag) break;
-        }
-        for (int l = k; l < j; l++) {
-            if (sequence[l] < flag) return false;
-            if (l == j - 1) return true;
+        if (i >= j) return true;
+
+        int x = i;
+
+        for (;x < j; x++){
+            if (sequence[x] > sequence[j]) break;
         }
 
-        return process(sequence, i, k - 1) && process(sequence, k, j);
+        for (int y = x; y < j; y++){
+            if (sequence[y] < sequence[j]) return false;
+        }
+
+        return process(sequence, i, x - 1) && process(sequence, x, j - 1);
+
     }
 
     public static boolean VerifySquenceOfBST(int [] sequence) {
-        if (sequence.length == 0) return false;
-        return process(sequence, 0, sequence.length - 1 );
+        if (sequence == null || sequence.length == 0) return false;
+        return process(sequence, 0, sequence.length - 1);
     }
 
     public static void main(String[] args) {
