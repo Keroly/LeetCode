@@ -6,6 +6,8 @@
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Stack;
 
 public class B25 {
@@ -22,16 +24,19 @@ public class B25 {
     static Stack<Integer> stack = new Stack<>();
 
     public static void proess(TreeNode root, int target, int cur){
-        if (target == cur && root == null) {
+        if (root == null && target == cur){     // 到达空节点，并且数值相等,形成list
             result.add(new ArrayList<>(stack));
         }
-        if (root == null) return;
 
-        stack.push(root.val);
+        if (root == null){  // 到达空节点，数值不等，出栈
+            return;
+        }
+
+        stack.push(root.val);   //  当前不是空节点
         proess(root.left, target, cur + root.val);
         stack.pop();
 
-        if (root.left == null && root.right == null) return;
+        if (root.left == null && root.right == null) return;    // 到达叶子节点时，只需要递归一次
 
         stack.push(root.val);
         proess(root.right, target, cur + root.val);
@@ -39,14 +44,18 @@ public class B25 {
     }
 
     public static ArrayList<ArrayList<Integer>> FindPath(TreeNode root, int target) {
-        if (root == null){
-            return new ArrayList<>();
+        if (root != null){
+            proess(root, target, 0);
         }
-        proess(root, target, 0);
+
+        Collections.sort(result, new Comparator<ArrayList<Integer>>() {
+            @Override
+            public int compare(ArrayList<Integer> o1, ArrayList<Integer> o2) {
+                if (o1.size()<o2.size()){
+                    return 1;
+                }else return -1;
+            }
+        });
         return result;
-    }
-
-    public static void main(String[] args) {
-
     }
 }
