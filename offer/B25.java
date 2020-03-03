@@ -32,14 +32,11 @@ public class B25 {
             return;
         }
 
-        stack.push(root.val);   //  当前不是空节点
-        proess(root.left, target, cur + root.val);
-        stack.pop();
-
-        if (root.left == null && root.right == null) return;    // 到达叶子节点时，只需要递归一次
-
         stack.push(root.val);
-        proess(root.right, target, cur + root.val);
+        proess(root.left, target, cur + root.val);
+        if (root.left != null || root.right != null) {
+            proess(root.right, target, cur + root.val);
+        }
         stack.pop();
     }
 
