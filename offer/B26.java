@@ -8,27 +8,25 @@ public class B26 {
     public static int MoreThanHalfNum_Solution(int [] array) {
         if (array.length == 0) return 0;
         int cur = array[0];
-        int times = 1;
-        for (int i = 0; i < array.length; i++) {
+        int times = 0;
+        for (int i = 0; i < array.length; i++){
             if (times == 0){
                 cur = array[i];
-                times = 1;
-            }else {
-                if (cur == array[i]){
-                    times++;
-                }else {
-                    times--;
-                }
-            }
-        }
-        times = 0;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == cur){
                 times++;
+            }else {
+                times = cur == array[i] ? ++times : --times;
             }
         }
-        if (times << 1 <= array.length) return 0;
-        return cur;
+        int nums = 0;
+        for (int i = 0; i < array.length; i++){
+            if (array[i] == cur){
+                nums++;
+            }
+        }
+        if (nums > (array.length >> 1)){
+            return cur;
+        }
+        return 0;
     }
 
     public static void main(String[] args) {
