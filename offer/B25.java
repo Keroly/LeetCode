@@ -48,7 +48,7 @@ public class B25 {
         Collections.sort(result, new Comparator<ArrayList<Integer>>() {
             @Override
             public int compare(ArrayList<Integer> o1, ArrayList<Integer> o2) {
-                if (o1.size()<o2.size()){
+                if (o1.size() < o2.size()){
                     return 1;
                 }else return -1;
             }
