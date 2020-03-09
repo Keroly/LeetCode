@@ -5,7 +5,7 @@
  */
 
 public class B27 {
-    public static int getLower(int [] array , double target, int i, int j){
+    public int getLower(int [] array , double target, int i, int j){
         if (i <= j){
             int mid = (i + j) >> 1;
             if (array[mid] < target){
@@ -22,7 +22,7 @@ public class B27 {
         return -1;
     }
 
-    public static int getHigher(int [] array , double target, int i, int j){
+    public int getHigher(int [] array , double target, int i, int j){
         if (i <= j){
             int mid = (i + j) >> 1;
             if (array[mid] < target){
@@ -39,7 +39,7 @@ public class B27 {
         return -1;
     }
 
-    public static int GetNumberOfK(int [] array , int k) {
+    public int GetNumberOfK(int [] array , int k) {
         if (array == null || array.length == 0) return 0;
         int low = getLower(array, k, 0, array.length - 1);
         int high = getHigher(array, k, 0, array.length - 1);
@@ -47,10 +47,5 @@ public class B27 {
             return (high - low + 1);
         }
         return 0;
-    }
-
-    public static void main(String[] args) {
-        int[] array = {1,1,1,1,1,1,2};
-        System.out.println(GetNumberOfK(array, 1));
     }
 }
