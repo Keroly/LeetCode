@@ -5,26 +5,52 @@
  */
 
 public class B27 {
-    public static int process(int [] array , double num, int i, int j){
-        int mid = (i + j) >> 1;
-        if (i == j) return array[i] < num ? i + 1 : i;
-        if (i > j) return i;
-
-        if (array[mid] > num){
-            return process(array, num, i, mid - 1);
-        }else{
-            return process(array, num, mid + 1, j);
+    public static int getLower(int [] array , double target, int i, int j){
+        if (i <= j){
+            int mid = (i + j) >> 1;
+            if (array[mid] < target){
+                return getLower(array, target, mid + 1, j); // 前半段
+            }else if (array[mid] > target){
+                return getLower(array, target, i, mid - 1); // 后半段
+            }else {
+                if (mid == 0 || (mid != 0 && array[mid - 1] != target)){    // 判断是不是第一个target
+                    return mid;
+                }
+                return getLower(array, target, i, mid - 1);
+            }
         }
+        return -1;
+    }
 
+    public static int getHigher(int [] array , double target, int i, int j){
+        if (i <= j){
+            int mid = (i + j) >> 1;
+            if (array[mid] < target){
+                return getHigher(array, target, mid + 1, j);
+            }else if (array[mid] > target){
+                return getHigher(array, target, i, mid - 1);
+            }else {
+                if (mid == array.length - 1 || (mid != array.length - 1 && array[mid + 1] != target)){
+                    return mid;
+                }
+                return getHigher(array, target, mid + 1, j);
+            }
+        }
+        return -1;
     }
 
     public static int GetNumberOfK(int [] array , int k) {
-        if (array.length == 0) return 0;
-        return process(array, k + 0.5, 0, array.length - 1) - process(array, k - 0.5, 0, array.length - 1);
+        if (array == null || array.length == 0) return 0;
+        int low = getLower(array, k, 0, array.length - 1);
+        int high = getHigher(array, k, 0, array.length - 1);
+        if (low != -1 && high != -1){
+            return (high - low + 1);
+        }
+        return 0;
     }
 
     public static void main(String[] args) {
-        int[] array = {1};
-        System.out.println(GetNumberOfK(array, 4));
+        int[] array = {1,1,1,1,1,1,2};
+        System.out.println(GetNumberOfK(array, 1));
     }
 }
