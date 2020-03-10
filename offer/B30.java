@@ -6,27 +6,23 @@
  */
 public class B30 {
     public void swap(char[] arr, int i, int j){
-        char temp = arr [i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+        while (i < j){
+            char temp = arr [i];
+            arr[i++] = arr[j];
+            arr[j--] = temp;
+        }
     }
 
     public String LeftRotateString(String str,int n) {
         if (str == null || str.length() == 0 || n < 0) return "";
         char[] array = str.toCharArray();
-        for (int i = 0, j = n - 1; i < j; i++, j--){
-            swap(array, i, j);
-        }
-        for (int i = n, j = array.length - 1; i < j;i++, j--){
-            swap(array, i, j);
-        }
-        for (int i = 0, j = array.length - 1; i < j;i++, j--){
-            swap(array, i, j);
-        }
+        swap(array, 0, n - 1);
+        swap(array, n, array.length - 1);
+        swap(array, 0, array.length - 1);
         return String.valueOf(array);
     }
 
     public static void main(String[] args) {
-        System.out.println(new B30().LeftRotateString("abcdefg", 0));
+        System.out.println(new B30().LeftRotateString("abcdefg", 1));
     }
 }
