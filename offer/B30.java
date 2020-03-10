@@ -5,13 +5,13 @@
 对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。是不是很简单？OK，搞定它！
  */
 public class B30 {
-    public static void swap(char[] arr, int i, int j){
+    public void swap(char[] arr, int i, int j){
         char temp = arr [i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
 
-    public static String LeftRotateString(String str,int n) {
+    public String LeftRotateString(String str,int n) {
         if (str == null || str.length() == 0 || n < 0) return "";
         char[] array = str.toCharArray();
         for (int i = 0, j = n - 1; i < j; i++, j--){
@@ -27,6 +27,6 @@ public class B30 {
     }
 
     public static void main(String[] args) {
-        System.out.println(LeftRotateString("abcdefg", 0));
+        System.out.println(new B30().LeftRotateString("abcdefg", 0));
     }
 }
