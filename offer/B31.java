@@ -1,5 +1,5 @@
 /*
-
+    扑克牌顺子
 题目描述
 他随机从中抽出了5张牌,想测测自己的手气,看看能不能抽到顺子
 “红心A,黑桃3,小王,大王,方片5”,不是顺子.....LL决定大\小王可以看成任何数字,并且A看作1,J为11,Q为12,K为13。上面的5张牌就可以变成“1,2,3,4,5”(大小王分别看作2和4)。
@@ -12,14 +12,12 @@ import java.util.HashSet;
 public class B31 {
     public static boolean isContinuous(int [] numbers) {
         if (numbers.length != 5) return false;
-        int zero_num = 0;
         int max = Integer.MIN_VALUE;
         int min = Integer.MAX_VALUE;
         HashSet<Integer> set = new HashSet();
 
         for (int i = 0; i < numbers.length; i++) {
             if (numbers[i] == 0){
-                zero_num += 1;
                 continue;
             }
             if (set.contains(numbers[i])) return false;
