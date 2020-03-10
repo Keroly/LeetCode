@@ -12,30 +12,21 @@ public class B30 {
     }
 
     public static String LeftRotateString(String str,int n) {
-        char[] arr = str.toCharArray();
-        if (n > arr.length) return str;
-        for (int i = 0; i < n; i++) {
-            if (i < n - i - 1){
-                swap(arr, i, n - i - 1);
-            }
+        if (str == null || str.length() == 0 || n < 0) return "";
+        char[] array = str.toCharArray();
+        for (int i = 0, j = n - 1; i < j; i++, j--){
+            swap(array, i, j);
         }
-
-        for (int j = n; j < arr.length; j++){
-            if (j < arr.length - 1 + n - j) {
-                swap(arr, j, arr.length - 1 + n - j);
-            }
+        for (int i = n, j = array.length - 1; i < j;i++, j--){
+            swap(array, i, j);
         }
-
-        for (int i = 0; i < arr.length; i++) {
-            if (i < arr.length - 1 - i){
-                swap(arr, i, arr.length - 1 - i);
-            }
+        for (int i = 0, j = array.length - 1; i < j;i++, j--){
+            swap(array, i, j);
         }
-
-        return String.valueOf(arr);
+        return String.valueOf(array);
     }
 
     public static void main(String[] args) {
-        System.out.println(LeftRotateString("abcdefg", 1));
+        System.out.println(LeftRotateString("abcdefg", 0));
     }
 }
