@@ -11,7 +11,7 @@ import java.util.HashSet;
 
 public class B31 {
     public static boolean isContinuous(int [] numbers) {
-        if (numbers.length != 5) return false;
+        if (numbers == null || numbers.length != 5) return false;
         int max = Integer.MIN_VALUE;
         int min = Integer.MAX_VALUE;
         HashSet<Integer> set = new HashSet();
