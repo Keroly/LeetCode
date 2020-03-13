@@ -6,6 +6,6 @@
  */
 public class B52 {
     public boolean match(char[] str, char[] pattern){
-
+        return true;
     }
 }
