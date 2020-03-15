@@ -22,7 +22,7 @@ public class B58 {
     }
 
     boolean isSymmetrical(TreeNode pRoot) {
-        if (pRoot == null) return false;
+        if (pRoot == null) return true;
         return process(pRoot.left, pRoot.right);
     }
 }
