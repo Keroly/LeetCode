@@ -17,24 +17,16 @@ public class B57 {
 
     public TreeLinkNode GetNext(TreeLinkNode pNode) {
         if (pNode == null) return pNode;
-        TreeLinkNode node = pNode;
-        // 在以pNode为根的子树中,没有找到后继,且pNode是根节点
-        if (node.right == null && node.next == null) return null;
-        // 在以pNode为根的子树中,查找后继结点
-        if (node.right != null) {
-            node = node.right;
-            while (node.left != null) {
-                node = node.left;
-            }
-            return node;
+        if (pNode.right != null){
+            pNode = pNode.right;
+            while (pNode.left != null) pNode = pNode.left;
+            return pNode;
         }
-        //  在以pNode为根的子树中,没有找到后继,且pNode不是根节点,pNode是其父的右孩子
-        if (node.next.left != node){
-            while (node.next != null && node.next.right == node){
-                node = node.next;
-            }
+        while (pNode.next != null){
+            if (pNode.next.left == pNode) return pNode.next;
+            pNode = pNode.next;
         }
-        return node.next;
+        return null;
     }
 
 }
