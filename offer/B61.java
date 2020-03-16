@@ -9,8 +9,6 @@
 二叉树的反序列化是指：根据某种遍历顺序得到的序列化字符串结果str，重构二叉树。
  */
 
-import sun.reflect.generics.tree.Tree;
-
 public class B61 {
     public class TreeNode {
         int val = 0;
