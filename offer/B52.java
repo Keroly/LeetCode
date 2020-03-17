@@ -5,7 +5,15 @@
 在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串"aaa"与模式"a.a"和"ab*ac*a"匹配，但是与"aa.a"和"ab*a"均不匹配
  */
 public class B52 {
+    public boolean process(char[] str, int strIndex, char[] pattern, int patternIndex){
+        if (str.length == strIndex && pattern.length == patternIndex) return true;
+        if (str.length == strIndex && pattern.length != patternIndex) return false;
+
+        return false;
+    }
+
     public boolean match(char[] str, char[] pattern){
-        return true;
+        if (str == null || pattern == null) return false;
+        return process(str, 0, pattern, 0);
     }
 }
