@@ -40,7 +40,4 @@ public class B66 {
         process(arr, x , y + 1, threshold, flag);
     }
 
-    public static void main(String[] args) {
-        System.out.println(new B66().movingCount(10,1,100));
-    }
 }
