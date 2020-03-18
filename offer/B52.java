@@ -6,9 +6,30 @@
  */
 public class B52 {
     public boolean process(char[] str, int strIndex, char[] pattern, int patternIndex){
+        // 同时结束
         if (str.length == strIndex && pattern.length == patternIndex) return true;
-        if (str.length == strIndex && pattern.length != patternIndex) return false;
+        // 字符串没有结束,但是模式串结束
+        if (str.length != strIndex && pattern.length == patternIndex) return false;
 
+        if (patternIndex < pattern.length - 1 && pattern[patternIndex + 1] == '*') {
+            if (str.length != strIndex && (str[strIndex] == pattern[patternIndex] || pattern[patternIndex] == '.')){
+                // 位置是第一种正常,且位置上的字母匹配
+                return process(str, strIndex, pattern, patternIndex + 2)    // '*' 0次
+                        || process(str, strIndex + 1, pattern, patternIndex)    // '*' n次
+                        || process(str, strIndex + 1, pattern, patternIndex + 2);   // '*' 1次
+            }else {
+                // 位置是第一种正常,但是位置上的字母不匹配 ||　位置不正常：字符串已经结束，但是模式串没结束，且模式串接下来是 ?*
+                return process(str, strIndex, pattern ,patternIndex + 2);   // '*' 0次
+            }
+        }
+
+        if (str.length != strIndex && (str[strIndex] == pattern[patternIndex] || pattern[patternIndex] == '.')){
+            //　位置是第二种正常,且位置上的字母匹配 || 位置不正常：字符串和模式串都到了最后一位，且位置上的字母匹配
+            return process(str, strIndex + 1, pattern, patternIndex + 1);
+        }
+
+        //　位置是第二种正常,但位置上的字母不匹配
+        //  位置不正常：字符串和模式串都到了最后一位，但位置上的字母不匹配
         return false;
     }
 
