@@ -7,15 +7,18 @@
 
 public class B53 {
     public boolean isNumeric(char[] str) {
+        if (str == null) return false;
         String arr = String.valueOf(str);
         if (arr.endsWith("f") || arr.endsWith("F") ||arr.endsWith("d") ||arr.endsWith("D")){
             return false;
         }
+
         try {
             Double.parseDouble(arr);
         }catch (Exception e){
             return false;
         }
+
         return true;
     }
 }
