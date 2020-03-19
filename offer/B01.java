@@ -7,7 +7,7 @@
  */
 
 public class B01 {
-    public static boolean Find(int target, int [][] array) {
+    public  boolean Find(int target, int [][] array) {
         int x = 0;
         int y = array[0].length - 1;
         while (x < array.length && y > -1){
@@ -20,10 +20,5 @@ public class B01 {
             }
         }
         return false;
-    }
-
-    public static void main(String[] args) {
-        int[][] array = {{1,2,3,4},{5,6,7,8},{9,10,11,12}};
-        System.out.println(Find(7, array));
     }
 }
