@@ -8,13 +8,14 @@
 
 public class B01 {
     public  boolean Find(int target, int [][] array) {
+        if (array == null) return false;
         int x = 0;
         int y = array[0].length - 1;
-        while (x < array.length && y > -1){
-            if (target < array[x][y]){
-                y -= 1;
-            }else if (target > array[x][y]){
-                x += 1;
+        while (x < array.length && y >= 0){
+            if (array[x][y] < target){
+                x++;
+            }else if (array[x][y] > target){
+                y--;
             }else {
                 return true;
             }
@@ -22,3 +23,5 @@ public class B01 {
         return false;
     }
 }
+
+// 时间：O(x + y)  空间：O(1)
