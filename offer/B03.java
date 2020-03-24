@@ -1,13 +1,14 @@
 /*
     从尾到头打印单链表
-题目描述
+
+题目描述：
 输入一个链表，按链表从尾到头的顺序返回一个ArrayList。
  */
 
 import java.util.ArrayList;
 
 public class B03 {
-    public static class ListNode {
+    public class ListNode {
         int val;
         ListNode next = null;
 
@@ -16,24 +17,26 @@ public class B03 {
         }
     }
 
-    static ArrayList<Integer> list = new ArrayList<Integer>();
+    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+        ArrayList<Integer> result = new ArrayList<>();
+        if (listNode == null) return result;
 
-    public static ArrayList<Integer> printListFromTailToHead(ListNode listNode) { // 递归
-        if (listNode != null) {
-            printListFromTailToHead(listNode.next);
-            list.add(listNode.val);
-        }
-        return list;
-    }
+        ListNode pre = listNode;
+        ListNode cur = listNode.next;
+        pre.next = null;
 
-    public static void main(String[] args) {
-        ListNode node = new ListNode(5);
-        node.next = new ListNode(81);
-        node.next.next = new ListNode(61);
-        node.next.next.next = new ListNode(95);
-        ArrayList list = printListFromTailToHead(node);
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
+        while (cur != null){
+            ListNode node = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = node;
         }
+        while (pre != null){
+            result.add(pre.val);
+            pre = pre.next;
+        }
+        return result;
     }
 }
+
+//  时间：O(n) 空间：O(n)
