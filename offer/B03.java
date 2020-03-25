@@ -21,9 +21,8 @@ public class B03 {
         ArrayList<Integer> result = new ArrayList<>();
         if (listNode == null) return result;
 
-        ListNode pre = listNode;
-        ListNode cur = listNode.next;
-        pre.next = null;
+        ListNode pre = null;
+        ListNode cur = listNode;
 
         while (cur != null){
             ListNode node = cur.next;
