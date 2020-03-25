@@ -37,6 +37,25 @@ public class L148 {
         return result.next;
     }
 
+    public ListNode split(ListNode start, ListNode end){    // 递归,但是空间复杂度不是O(1)
+        if (start == end) return start;
+
+        ListNode slow = start;
+        ListNode fast = start;
+        while (fast.next != null && fast.next.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        ListNode mid = slow.next;
+        slow.next = null;
+
+        ListNode left =  split(start, slow);
+        ListNode rigjt =  split(mid, end);
+
+        return merge(left, rigjt);
+    }
+
     public ListNode cut(ListNode start, int size){
         if (start == null) return null;
         ListNode cur = start;
