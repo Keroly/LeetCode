@@ -51,9 +51,9 @@ public class L148 {
         slow.next = null;
 
         ListNode left =  split(start, slow);
-        ListNode rigjt =  split(mid, end);
+        ListNode right =  split(mid, end);
 
-        return merge(left, rigjt);
+        return merge(left, right);
     }
 
     public ListNode cut(ListNode start, int size){
