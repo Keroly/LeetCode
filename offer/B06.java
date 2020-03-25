@@ -30,3 +30,5 @@ public class B06 {
         return array[low];
     }
 }
+
+//  时间：O(logn) 空间：O(1)
