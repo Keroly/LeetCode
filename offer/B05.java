@@ -16,22 +16,10 @@ public class B05 {
 
     public int pop() {
         if (stack2.isEmpty()){
-            while (!stack1.isEmpty()){
-                stack2.push(stack1.pop());
-            }
+           while (!stack1.isEmpty()){
+               stack2.push(stack1.pop());
+           }
         }
         return stack2.pop();
-    }
-
-    public static void main(String[] args) {
-        B05 t = new B05();
-        t.push(0);
-        t.push(1);
-        t.push(2);
-        t.push(3);
-        System.out.println(t.pop());
-        System.out.println(t.pop());
-        System.out.println(t.pop());
-        System.out.println(t.pop());
     }
 }
