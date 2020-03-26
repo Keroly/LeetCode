@@ -5,18 +5,15 @@
  */
 
 public class B07 {
-    public static int Fibonacci(int n) { // 递归的时间复杂度：O(2^n) 空间：O(1)     此方法时间:O(n) 空间:O(1)
-       if (n < 2) return n;
-       int a = 0;
-       int b = 1;
-       for (int i = 1; i < n; i++){
-           b = a + b;
-           a = b - a;
-       }
-       return b;
+    public int Fibonacci(int n) {
+        if (n == 0) return 0;
+        int a = 0;
+        int b = 1;
+        while (--n != 0){
+            b = a + b;
+            a = b - a;
+        }
+        return b;
     }
 
-    public static void main(String[] args) {
-        System.out.println(Fibonacci(6));
-    }
 }
