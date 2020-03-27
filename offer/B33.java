@@ -6,24 +6,21 @@
  */
 
 public class B33 {
-    public static double process(double base, int exponent){
+    public double process(double base, int exponent){
         if (exponent == 0) return 1;
         if (exponent == 1) return base;
+        double sum = process(base, exponent / 2);
+        double result = sum * sum;
         if ((exponent & 1) == 1){
-            return process(base, (exponent - 1) >> 1) * process(base, (exponent - 1) >> 1) * base;
-        }else {
-            return process(base, exponent >> 1) * process(base, exponent >> 1);
+            return result * base;
         }
+        return result;
     }
 
-    public static double Power(double base, int exponent) {
-        if (base == 0 && exponent == 0) return 0;
-        int e = exponent > 0 ? exponent : -exponent;
-        double result = process(base,e);
-        return exponent > 0 ? result : 1 / result;
+    public double Power(double base, int exponent) {
+        if (base == 0 || base == 1) return base;
+        double result = process(base, Math.abs(exponent));
+        return exponent > 0 ? result : 1.0 / result;
     }
 
-    public static void main(String[] args) {
-        System.out.println(Power(2, -2));
-    }
 }
