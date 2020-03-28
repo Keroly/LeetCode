@@ -1,36 +1,58 @@
 /*
     调整数组顺序使奇数在偶数前，并保持相对顺序不变
-题目描述
+
+题目描述：
 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。
  */
 
 import java.util.Stack;
 
 public class B11 {
-    public static void reOrderArray(int [] array) { // 时间复杂度O(n) 空间复杂度O(n)
-        Stack<Integer> stack_1 = new Stack<Integer>();
-        Stack<Integer> stack_2 = new Stack<Integer>();
-        for (int i = 0; i < array.length; i++){
-            if ((array[i] & 1) == 1){
-                stack_1.push(array[i]);
-            }else {
-                stack_2.push(array[i]);
+//------------------------------------------ 扰乱相对次序  ---------------------------------------------------------------
+    public void reOrderArray(int [] array) {
+        int i = 0;
+        int j = array.length - 1;
+        while (i < j){
+            while (i < j && (array[i] & 1) == 1){
+                i++;
+            }
+
+            while (i < j && (array[j] & 1) == 0){
+                j--;
+            }
+
+            if (i < j){
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                i++;
+                j--;
             }
         }
-        int i = array.length - 1;
-        while (!stack_2.isEmpty()){
-            array[i--] = stack_2.pop();
+    }
+//------------------------------------------  保持相对次序  --------------------------------------------------------------
+    public void reOrderArray_2(int [] array) {
+        Stack<Integer> stack_0 = new Stack<>();
+        Stack<Integer> stack_1 = new Stack<>();
+
+        for (int i = 0; i < array.length; i++){
+            if ((array[i] & 1) == 1){
+                stack_1.add(array[i]);
+            }else {
+                stack_0.add(array[i]);
+            }
         }
+
+        int i = array.length - 1;
+
+        while (!stack_0.isEmpty()){
+            array[i--] = stack_0.pop();
+        }
+
         while (!stack_1.isEmpty()){
             array[i--] = stack_1.pop();
         }
     }
-
-    public static void main(String[] args) {
-        int[] array = {1,5,2,4,3,6,9,8,7,5,1};
-        reOrderArray(array);
-        for (int i = 0; i < array.length; i++) {
-            System.out.println(array[i]);
-        }
-    }
 }
+
+// 时间：O(n) 空间：O(n)
