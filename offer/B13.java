@@ -1,10 +1,12 @@
 /*
     反转链表
-题目描述
+
+题目描述：
 输入一个链表，反转链表后，输出新链表的表头。
  */
+
 public class B13 {
-    public static class ListNode {
+    public  class ListNode {
         int val;
         ListNode next = null;
 
@@ -12,34 +14,25 @@ public class B13 {
             this.val = val;
         }
     }
-
-    public static ListNode node;
-    public static ListNode process(ListNode head){
-        if (head.next == null) {
-            node = head;
-            return head;
-        }
-        ListNode temp = head.next;
-        head.next = null;
-        process(temp).next = head;
-        return head;
-    }
-
-    public static ListNode ReverseList(ListNode head) {
+//----------------------------------------------  递归  -----------------------------------------------------------------
+    public ListNode ReverseList(ListNode head) {
         if (head == null || head.next == null) return head;
-        process(head);
-        return node;
+        ListNode result = ReverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return result;
     }
-
-    public static void main(String[] args) {
-        ListNode node1 = new ListNode(0);
-        node1.next = new ListNode(1);
-        node1.next.next = new ListNode(2);
-        node1.next.next.next = new ListNode(3);
-        node1 = ReverseList(node1);
-        while (node1 != null){
-            System.out.println(node1.val);
-            node1 = node1.next;
+//----------------------------------------------  非递归  ---------------------------------------------------------------
+    public ListNode ReverseList_2(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null){
+            ListNode node = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = node;
         }
+        return pre;
     }
 }
