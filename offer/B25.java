@@ -11,7 +11,7 @@ import java.util.Comparator;
 import java.util.Stack;
 
 public class B25 {
-    public static class TreeNode {
+    public class TreeNode {
         int val = 0;
         TreeNode left = null;
         TreeNode right = null;
@@ -20,27 +20,26 @@ public class B25 {
             this.val = val;
         }
     }
-    static ArrayList<ArrayList<Integer>> result = new ArrayList<>();
-    static Stack<Integer> stack = new Stack<>();
 
-    public static void proess(TreeNode root, int target, int cur){
-        if (root == null && target == cur){     // 到达空节点，并且数值相等,形成list
-            result.add(new ArrayList<>(stack));
+    Stack<Integer> stack = new Stack<>();
+    ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+
+    public void proess(TreeNode root, int target, int cur){
+        if (root == null && target == cur) {
+            result.add(new ArrayList<Integer>(stack));
         }
-
-        if (root == null){  // 到达空节点，数值不等，出栈
+        if (root == null){
             return;
         }
-
-        stack.push(root.val);
+        stack.add(root.val);
         proess(root.left, target, cur + root.val);
-        if (root.left != null || root.right != null) {
+        if (root.left != null || root.right != null){
             proess(root.right, target, cur + root.val);
         }
         stack.pop();
     }
 
-    public static ArrayList<ArrayList<Integer>> FindPath(TreeNode root, int target) {
+    public ArrayList<ArrayList<Integer>> FindPath(TreeNode root, int target) {
         if (root != null){
             proess(root, target, 0);
         }
@@ -48,9 +47,7 @@ public class B25 {
         Collections.sort(result, new Comparator<ArrayList<Integer>>() {
             @Override
             public int compare(ArrayList<Integer> o1, ArrayList<Integer> o2) {
-                if (o1.size() < o2.size()){
-                    return 1;
-                }else return -1;
+                return o1.size() < o2.size() ? 1 : -1;
             }
         });
         return result;
