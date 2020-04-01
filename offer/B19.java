@@ -1,6 +1,7 @@
 /*
     从上往下打印二叉树
-题目描述
+
+题目描述：
 从上往下打印出二叉树的每个节点，同层节点从左至右打印。
  */
 
@@ -9,7 +10,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class B19 {
-    public static class TreeNode {
+    public class TreeNode {
         int val = 0;
         TreeNode left = null;
         TreeNode right = null;
