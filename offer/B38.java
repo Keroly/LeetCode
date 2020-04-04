@@ -8,12 +8,16 @@ public class B38 {
     // 动态规划
     public int FindGreatestSumOfSubArray(int[] array) {
         if (array == null || array.length == 0) return 0;
-        int res = array[0];
-        int max = array[0];
+        int sum = array[0];
+        int result = array[0];
         for (int i = 1; i < array.length; i++){
-            max = Math.max(max + array[i], array[i]);    // 选择某序列到 i 位置，还是选择 i 位置打头；并记录下以 i 位置结尾的最大值
-            res = Math.max(max, res);
+            if (sum + array[i] < array[i]){
+                result = Math.max(result, sum);
+                sum = array[i];
+            }else {
+                sum += array[i];
+            }
         }
-        return res;
+        return Math.max(result, sum);
     }
 }
