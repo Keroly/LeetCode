@@ -13,12 +13,10 @@ public class L215 {
         for (Integer element: nums) {
             if (queue.size() < k){
                 queue.add(element);
-            }else {
-                if (element > queue.peek()){
+            }else if (element > queue.peek()){
                     queue.poll();
                     queue.add(element);
                 }
-            }
         }
         return queue.poll();
     }
