@@ -42,5 +42,4 @@ public class B36 {
         Collections.sort(list);
         return list;
     }
-
 }
