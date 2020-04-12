@@ -9,6 +9,7 @@
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 
 public class B36 {
     public void  swap(char[] arr, int i, int j){
@@ -22,9 +23,11 @@ public class B36 {
             list.add(new String(arr));
             return;
         }
+        HashSet<Character> set = new HashSet<>();
 
         for (int i = index; i < arr.length; i++){
-           if (i == index || arr[i] != arr[index]){
+           if (!set.contains(arr[i])){
+               set.add(arr[i]);
                swap(arr, i, index);
                process(list, index + 1, arr);
                swap(arr, i, index);
@@ -39,4 +42,5 @@ public class B36 {
         Collections.sort(list);
         return list;
     }
+
 }
