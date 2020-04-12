@@ -5,10 +5,7 @@
 给定一个 没有重复 数字的序列，返回其所有可能的全排列。
  */
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class L046 {
     public void process(ArrayList<Integer> nums, int length, int index, List<List<Integer>> result){
@@ -36,6 +33,7 @@ public class L046 {
             elements.add(element);
         }
         process(elements, nums.length, 0, result);
+
         return result;
     }
 }
