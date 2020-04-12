@@ -7,15 +7,20 @@
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 public class L046 {
     public void process(ArrayList<Integer> nums, int length, int index, List<List<Integer>> result){
         if (index == length){
             result.add(new ArrayList<>(nums));
+            return;
         }
+
+        HashSet<Integer> set = new HashSet<>();
         for (int i = index; i < length; i++){
-            if (i == index || nums.get(i) != nums.get(index)){
+            if (!set.contains(nums.get(i))){
+                set.add(nums.get(i));
                 Collections.swap(nums, index, i);
                 process(nums, length, index + 1, result);
                 Collections.swap(nums, index, i);
