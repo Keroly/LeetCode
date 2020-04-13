@@ -62,7 +62,7 @@ public class B43 {
     }
 
     public static void main(String[] args) {
-        int[] arr = {4,3,2,1};
+        int[] arr = {4, 3, 2, 1};
         System.out.println(new B43().InversePairs(arr));
     }
 }
