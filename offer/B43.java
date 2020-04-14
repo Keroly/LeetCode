@@ -60,9 +60,4 @@ public class B43 {
         process(array, help, 0, array.length - 1);
         return count % 1000000007;
     }
-
-    public static void main(String[] args) {
-        int[] arr = {4, 3, 2, 1};
-        System.out.println(new B43().InversePairs(arr));
-    }
 }
