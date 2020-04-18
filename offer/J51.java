@@ -19,25 +19,25 @@ public class J51 {
         int result_1 = process(array, help, start, mid);
         int result_2 = process(array, help, mid + 1, end);
         int count = result_1 + result_2;
-        int i = mid;
-        int j = end;
+        int p_left = mid;
+        int p_right = end;
         int cur = end;
-        while (i >= start && j >= mid + 1){
-            if (array[i] > array[j]){
-                count += j - mid;
-                help[cur--] = array[i--];
+        while (p_left >= start && p_right >= mid + 1){
+            if (array[p_left] > array[p_right]){
+                count += p_right - mid;
+                help[cur--] = array[p_left--];
             }else {
-                help[cur--] = array[j--];
+                help[cur--] = array[p_right--];
             }
         }
-        while (i >= start){
-            help[cur--] = array[i--];
+        while (p_left >= start){
+            help[cur--] = array[p_left--];
         }
-        while (j >= mid + 1){
-            help[cur--] = array[j--];
+        while (p_right >= mid + 1){
+            help[cur--] = array[p_right--];
         }
-        for (int flag = start; flag <= end; flag++){
-            array[flag] = help[flag];
+        for (int i = start; i <= end; i++){
+            array[i] = help[i];
         }
         return count;
     }
