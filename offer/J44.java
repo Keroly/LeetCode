@@ -11,15 +11,17 @@ public class J44 {
         if (n == 0) {
             return 0;
         }
-        int i = 1;
-        while (n > Math.pow(10, i - 1) * 9) {
-            n -= Math.pow(10, i - 1) * 9;
-            i++;
+        int digit = 1;
+        long start = 1;
+        long count = 9;
+        while (n > count) {
+            n -= count;
+            digit += 1;
+            start = start * 10;
+            count = digit * start * 9;
         }
-        int num = (int) Math.pow(10, i - 1) + (n - 1) / i;
-        int index = (n - 1) % i ;
-        String res = String.valueOf(num);
-        String s = res.substring(index, index + 1);
-        return Integer.parseInt(s);
+        long num = start + (n - 1) / digit;
+        int res = Long.toString(num).charAt((n - 1) % digit) - '0';
+        return res;
     }
 }
