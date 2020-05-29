@@ -16,7 +16,7 @@
 import java.util.Scanner;
 
 public class C2_Complete_Knapsack {
-    public static void main(String[] args) throws Exception { // 原始dp,二维数组
+    public static void main(String[] args) throws Exception {
         Scanner reader = new Scanner(System.in);
         // 物品的数量为N
         int N = reader.nextInt();
