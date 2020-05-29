@@ -14,9 +14,10 @@
 
  */
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class C2_Multiple_Knapsack_1 {
+public class C2_Multiple_Knapsack_3 {
     public static void main(String[] args) throws Exception {
         Scanner reader = new Scanner(System.in);
         // 物品的数量为N
@@ -24,35 +25,40 @@ public class C2_Multiple_Knapsack_1 {
         // 背包的容量为V
         int V = reader.nextInt();
         // 一个长度为N的数组，第i个元素表示第i个物品的体积；
-        int[] v = new int[N + 1] ;
+        ArrayList<Integer> v = new ArrayList<>();
         // 一个长度为N的数组，第i个元素表示第i个物品的价值；
-        int[] w = new int[N + 1] ;
-
-        int[] nums = new int[N + 1];
+        ArrayList<Integer> w = new ArrayList<>();
+        v.add(0);
+        w.add(0);
 
         for (int i = 1 ; i <= N ;i++)
         {
-            v[i] = reader.nextInt();
-            w[i] = reader.nextInt();
-            nums[i] = reader.nextInt();
+            int a = reader.nextInt();
+            int b = reader.nextInt();
+            int c = reader.nextInt();
+            for (int k = 1; k <= c; k *= 2)
+            {
+                c -= k;
+                v.add(k * a);
+                w.add(k * b);
+            }
+            if (c > 0)
+            {
+                v.add(c * a);
+                w.add(c * b);
+            }
         }
         reader.close() ;
 
-        int[] dp = new int[V + 1];
-        for (int i = 1; i <= N; i++)
+        int[] dp = new int[v.size()];
+        for (int i = 1; i < v.size(); i++)
         {
-            for (int j = V; j >= 0; j--)
+            for (int j = V; j - v.get(i) >= 0; j--)
             {
-                int maxnum = 0;
-                for (int k = 1; k <= nums[i]; k++)
-                {
-                    if (j - k * v[i] >= 0)
-                    {
-                        dp[j] = Math.max(dp[j], dp[j - k * v[i]] + k * w[i]);
-                    }
-                }
+                dp[j] = Math.max(dp[j], dp[j - v.get(i)] + w.get(i));
             }
         }
+
         System.out.println(dp[V]);
     }
 }
