@@ -28,16 +28,35 @@ public class C2_Multiple_Knapsack_1 {
         // 一个长度为N的数组，第i个元素表示第i个物品的价值；
         int[] w = new int[N + 1] ;
 
+        int[] nums = new int[N + 1];
+
         for (int i = 1 ; i <= N ;i++)
         {
             v[i] = reader.nextInt();
             w[i] = reader.nextInt();
+            nums[i] = reader.nextInt();
         }
         reader.close() ;
 
-
-
-
+        int[] dp = new int[V + 1];
+        for (int i = 1; i <= N; i++)
+        {
+            for (int j = V; j >= 0; j--)
+            {
+                if (nums[i] > 0 && j - v[i] >= 0)
+                {
+                    int maxnum = 0;
+                    for (int k = 1; k <= nums[i]; k++)
+                    {
+                        if (j - k * v[i] >= 0)
+                        {
+                            dp[j] = Math.max(dp[j], dp[j - k * v[i]] + k * w[i]);
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(dp[V]);
     }
 }
 
