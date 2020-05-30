@@ -49,6 +49,7 @@ public class C2_2DCost_Knapsack {
                 for (int k = V; k >= v[i]; k--)
                 {
                         dp[j][k] = Math.max(dp[j - m[i]][k -v[i]] + w[i], dp[j][k]);
+
                 }
             }
         }
