@@ -9,14 +9,18 @@
 
 public class L198 {
     public int rob(int[] nums) {
+        if (nums.length == 0)
+        {
+            return 0;
+        }
         int n = nums.length;
         int[] f = new int[n + 1];
-        int[] g = new int[n + 1];
-        for (int i = 1; i <= n; i++)
+        f[0] = 0;
+        f[1] = nums[0];
+        for (int i = 2; i <= n; i++)
         {
-            f[i] = Math.max(f[i - 1], g[i - 1]);
-            g[i] = f[i - 1] + nums[i - 1];
+            f[i] = Math.max(f[i - 1],f[i - 2] + nums[i - 1]);
         }
-        return Math.max(f[n], g[n]);
+        return f[n];
     }
 }
