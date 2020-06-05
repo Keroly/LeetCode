@@ -20,8 +20,4 @@ public class L096 {
         }
         return result[n];
     }
-
-    public static void main(String[] args) {
-        System.out.println(new L096().numTrees(3));
-    }
 }
