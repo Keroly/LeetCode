@@ -1,9 +1,9 @@
 /*
     最长连续序列
-题目描述:
-给定一个未排序的整数数组，找出最长连续序列的长度。
 
-要求算法的时间复杂度为 O(n)
+题目描述:
+给定一个未排序的整数数组，找出最长连续序列的长度。 O(n)
+
  */
 
 
@@ -33,7 +33,4 @@ public class L128 {
         return result;
     }
 
-    public static void main(String[] args) {
-        System.out.println(new L128().longestConsecutive(new int[]{100,1,2,3,200}));
-    }
 }
