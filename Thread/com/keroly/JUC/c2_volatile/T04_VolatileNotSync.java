@@ -4,7 +4,7 @@
  * Copyright (c) 2020, tangwan All Rights Reserved.
  *
  */
-package com.tangwan.juc.c2_volatile;
+package com.keroly.JUC.c2_volatile;
 
 import java.util.ArrayList;
 import java.util.List;

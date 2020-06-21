@@ -4,7 +4,7 @@
  * Copyright (c) 2020, tangwan All Rights Reserved.
  *
  */
-package com.tangwan.juc.c4_atomicXXX;
+package com.keroly.JUC.c4_atomicXXX;
 
 import java.util.ArrayList;
 import java.util.List;
