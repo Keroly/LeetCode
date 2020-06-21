@@ -1,17 +1,6 @@
-/*
- * File Name:T03_ThreadState is created on 2020-04-21 15:33 by tangwan
- *
- * Copyright (c) 2020, tangwan All Rights Reserved.
- *
- */
+
 package com.keroly.JUC.c0_basic;
 
-/**
- * @author tangwan
- * @Description : T03_ThreadState
- * @date 2020-04-21 15:33
- * @since JDK 1.8
- */
 public class T03_ThreadState {
     static class MtThread extends Thread {
         @Override
