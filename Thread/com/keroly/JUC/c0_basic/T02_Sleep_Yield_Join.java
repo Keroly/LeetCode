@@ -1,30 +1,18 @@
-/*
- * File Name:T02_Sleep_Yield_Join is created on 2020-04-21 15:26 by tangwan
- *
- * Copyright (c) 2020, tangwan All Rights Reserved.
- *
- */
 package com.keroly.JUC.c0_basic;
 
-/**
- * @author tangwan
- * @Description : T02_Sleep_Yield_Join
- * @date 2020-04-21 15:26
- * @since JDK 1.8
- */
 public class T02_Sleep_Yield_Join {
     public static void main(String[] args) {
         //testSleep();
-        //testYield();
-        testJoin();
+        testYield();
+        //testJoin();
     }
 
-    private static void testJoin() {
+    private static void testJoin() {    // 调用其它线程
         Thread t1 = new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 System.out.println("A" + i);
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(1500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -41,7 +29,7 @@ public class T02_Sleep_Yield_Join {
             for (int i = 0; i < 10; i++) {
                 System.out.println("B" + i);
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(1500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -52,7 +40,7 @@ public class T02_Sleep_Yield_Join {
         t2.start();
     }
 
-    private static void testYield() {
+    private static void testYield() {    // 优雅让出
 
         new Thread(() -> {
             for (int i = 0; i < 100; i++) {
