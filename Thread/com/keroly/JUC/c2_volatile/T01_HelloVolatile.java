@@ -1,19 +1,9 @@
-/*
- * File Name:T01_HelloVolatile is created on 2020-04-21 15:59 by tangwan
- *
- * Copyright (c) 2020, tangwan All Rights Reserved.
- *
- */
+
 package com.keroly.JUC.c2_volatile;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author tangwan
- * @Description : T01_HelloVolatile
- * @date 2020-04-21 15:59
- * @since JDK 1.8
- */
+
 public class T01_HelloVolatile {
 
     // 注释之后，线程之间存在不可见性，程序会一直执行下去

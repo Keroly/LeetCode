@@ -1,19 +1,9 @@
-/*
- * File Name:T05_DeadLock is created on 2020-05-07 17:23 by Zhao Xiaoli
- *
- * Copyright (c) 2020, xiaoyujiaoyu technology All Rights Reserved.
- *
- */
+
 package com.keroly.JUC.c0_basic;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author Zhao Xiaoli
- * @Description : T05_DeadLock
- * @date 2020-05-07 17:23
- * @since JDK 1.8
- */
+
 public class T05_DeadLock {
 
     static class DeadLock {
