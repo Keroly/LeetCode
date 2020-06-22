@@ -1,19 +1,9 @@
-/*
- * File Name:T02_VolatileReference is created on 2020-04-21 16:02 by tangwan
- *
- * Copyright (c) 2020, tangwan All Rights Reserved.
- *
- */
+
 package com.keroly.JUC.c2_volatile;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author tangwan
- * @Description : T02_VolatileReference
- * @date 2020-04-21 16:02
- * @since JDK 1.8
- */
+
 public class T02_VolatileReference {
     boolean running = true;
 

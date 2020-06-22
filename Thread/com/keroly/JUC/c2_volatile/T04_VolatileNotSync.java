@@ -1,27 +1,20 @@
-/*
- * File Name:T04_VolatileNotSync is created on 2020-04-21 16:44 by tangwan
- *
- * Copyright (c) 2020, tangwan All Rights Reserved.
- *
- */
+
 package com.keroly.JUC.c2_volatile;
+
+/*
+
+    volatile只保证线程间可见性，不保证同步，也就是volatile不能替代synchronized
+
+ */
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author tangwan
- * @Description : T04_VolatileNotSync
- * <p>
- * volatile只保证线程间可见性，不保证同步
- * @date 2020-04-21 16:44
- * @since JDK 1.8
- */
 public class T04_VolatileNotSync {
 
     volatile int count = 0;
 
-    void m() {
+    /*synchronized*/ void m() {
         for (int i = 0; i < 10000; i++) {
             count++;
         }
@@ -35,10 +28,10 @@ public class T04_VolatileNotSync {
             threads.add(new Thread(t::m, "thread-" + i));
         }
 
-        threads.forEach(Thread::start);
-        threads.forEach(s -> {
+        threads.forEach((o) -> o.start());
+        threads.forEach((o) -> {
             try {
-                s.join();
+                o.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
