@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.LongAdder;
 public class T02_AtomicVsSyncVsLongAdder {
     static long count2 = 0L;
     static AtomicLong count1 = new AtomicLong(0L);
-    static LongAdder count3 = new LongAdder();
+    static LongAdder count3 = new LongAdder();  //  使用了分段锁，分段锁也是CAS操作
 
     public static void main(String[] args) throws Exception {
         Thread[] threads = new Thread[1000];
