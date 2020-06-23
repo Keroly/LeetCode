@@ -1,8 +1,9 @@
 /**
- * reentrantlock�������synchronized
- * ����������m1����this,ֻ��m1ִ����ϵ�ʱ��,m2����ִ��
- * �����Ǹ�ϰsynchronized��ԭʼ������
- * @author mashibing
+ *
+ * reentrantlock用于代替synchronized
+ * 本例中由于m1锁定this，只有m1执行完毕时，m2才能执行
+ * 这里是复习synchronized最原始的语义
+ *
  */
 package com.keroly.JUC.c_020;
 
@@ -25,7 +26,7 @@ public class T01_ReentrantLock1 {
 	synchronized void m2() {
 		System.out.println("m2 ...");
 	}
-	
+
 	public static void main(String[] args) {
 		T01_ReentrantLock1 rl = new T01_ReentrantLock1();
 		new Thread(rl::m1).start();
@@ -34,6 +35,6 @@ public class T01_ReentrantLock1 {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		//new Thread(rl::m2).start();
+		new Thread(rl::m2).start();
 	}
 }

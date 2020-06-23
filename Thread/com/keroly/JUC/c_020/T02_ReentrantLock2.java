@@ -1,12 +1,8 @@
 /**
- * reentrantlock�������synchronized
- * ����m1����this,ֻ��m1ִ����ϵ�ʱ��,m2����ִ��
- * �����Ǹ�ϰsynchronized��ԭʼ������
- * 
- * ʹ��reentrantlock�������ͬ���Ĺ���
- * ��Ҫע����ǣ�����Ҫ����Ҫ����Ҫ�ֶ��ͷ�������Ҫ������˵���飩
- * ʹ��syn�����Ļ���������쳣��jvm���Զ��ͷ���������lock�����ֶ��ͷ�������˾�����finally�н��������ͷ�
- * @author mashibing
+ *
+ * reentrantlock用于代替synchronized
+ * try catch finally
+ *
  */
 package com.keroly.JUC.c_020;
 
@@ -22,7 +18,9 @@ public class T02_ReentrantLock2 {
 			lock.lock(); //synchronized(this)
 			for (int i = 0; i < 10; i++) {
 				TimeUnit.SECONDS.sleep(1);
-
+				if (i == 2) {
+					m2();
+				}
 				System.out.println(i);
 			}
 		} catch (InterruptedException e) {

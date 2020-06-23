@@ -1,15 +1,4 @@
-/**
- * reentrantlock�������synchronized
- * ����m1����this,ֻ��m1ִ����ϵ�ʱ��,m2����ִ��
- * �����Ǹ�ϰsynchronized��ԭʼ������
- * 
- * ʹ��reentrantlock�������ͬ���Ĺ���
- * ��Ҫע����ǣ�����Ҫ����Ҫ����Ҫ�ֶ��ͷ�������Ҫ������˵���飩
- * ʹ��syn�����Ļ���������쳣��jvm���Զ��ͷ���������lock�����ֶ��ͷ�������˾�����finally�н��������ͷ�
- * 
- * ʹ��reentrantlock���Խ��С�����������tryLock�������޷�������������ָ��ʱ�����޷��������߳̿��Ծ����Ƿ�����ȴ�
- * @author mashibing
- */
+
 package com.keroly.JUC.c_020;
 
 import java.util.concurrent.TimeUnit;
@@ -22,9 +11,11 @@ public class T03_ReentrantLock3 {
 	void m1() {
 		try {
 			lock.lock();
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < 10; i++) {
 				TimeUnit.SECONDS.sleep(1);
-
+				if (i == 1) {
+					m2();
+				}
 				System.out.println(i);
 			}
 		} catch (InterruptedException e) {
@@ -34,22 +25,18 @@ public class T03_ReentrantLock3 {
 		}
 	}
 
-	/**
-	 * ʹ��tryLock���г�������������������񣬷�����������ִ��
-	 * ���Ը���tryLock�ķ���ֵ���ж��Ƿ�����
-	 * Ҳ����ָ��tryLock��ʱ�䣬����tryLock(time)�׳��쳣������Ҫע��unclock�Ĵ�������ŵ�finally��
-	 */
+	/*
+		可以使用tryLock尝试锁定，不管锁定与否，方法都继续执行
+		可以根据tryLock的返回值判断是否锁定
+		也可以指定tryLock的事件，由于tryLock(time)抛出异常，所以要注意unlock放在finally中
+ 	*/
+
 	void m2() {
-		/*
-		boolean locked = lock.tryLock();
-		System.out.println("m2 ..." + locked);
-		if(locked) lock.unlock();
-		*/
 		
 		boolean locked = false;
 		
 		try {
-			locked = lock.tryLock(5, TimeUnit.SECONDS);
+			locked = lock.tryLock(5, TimeUnit.SECONDS); // 尝试五秒钟之内拿到
 			System.out.println("m2 ..." + locked);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
