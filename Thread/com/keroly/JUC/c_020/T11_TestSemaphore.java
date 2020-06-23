@@ -2,10 +2,10 @@ package com.keroly.JUC.c_020;
 
 import java.util.concurrent.Semaphore;
 
-public class T11_TestSemaphore {
+public class T11_TestSemaphore { // 信号灯
     public static void main(String[] args) {
         //Semaphore s = new Semaphore(2);
-        Semaphore s = new Semaphore(2, true);
+        Semaphore s = new Semaphore(2, true); // 最多有几个线程同时执行，限流
         //允许一个线程同时执行
         //Semaphore s = new Semaphore(1);
 
