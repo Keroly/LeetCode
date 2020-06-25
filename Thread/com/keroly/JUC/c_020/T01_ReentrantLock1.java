@@ -11,6 +11,7 @@ package com.keroly.JUC.c_020;
 import java.util.concurrent.TimeUnit;
 
 public class T01_ReentrantLock1 {
+
 	synchronized void m1() {
 		for(int i=0; i<10; i++) {
 			try {
