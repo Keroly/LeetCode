@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-
 public class T01_AtomicInteger {
 	/*volatile*/ //int count1 = 0;
 	
