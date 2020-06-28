@@ -6,8 +6,7 @@
  * 
  * 使用Lock和Condition来实现
  * 对比两种方式，Condition的方式可以更加精确的指定哪些线程被唤醒
- * 
- * @author mashibing
+ *
  */
 package com.keroly.JUC.c_021_01_interview;
 
@@ -23,14 +22,14 @@ public class MyContainer2<T> {
 	private int count = 0;
 	
 	private Lock lock = new ReentrantLock();
-	private Condition producer = lock.newCondition();
+	private Condition producer = lock.newCondition(); // 等待队列
 	private Condition consumer = lock.newCondition();
 	
 	public void put(T t) {
 		try {
 			lock.lock();
 			while(lists.size() == MAX) { //想想为什么用while而不是用if？
-				producer.await();
+				producer.await();	// 进入不同的队列等待
 			}
 			
 			lists.add(t);
