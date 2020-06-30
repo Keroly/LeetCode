@@ -6,6 +6,7 @@
  * 使用wait notify notifyAll实现
  *
  */
+
 package com.keroly.JUC.c_021_01_interview;
 
 import java.util.LinkedList;
