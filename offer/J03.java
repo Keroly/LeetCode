@@ -14,13 +14,13 @@ public class J03 {
     }
 
     public int findRepeatNumber(int[] nums) {
-        for (int i = 0; i < nums.length; i++){
-            if (i == nums[i]){
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != i && nums[i] != nums[nums[i]]){
+                swap(nums, nums[i], nums[nums[i]]);
+                i--;
+            }else if (nums[i] == i) {
                 continue;
-            }
-            if (nums[i] != nums[nums[i]]){
-                swap(nums, nums[i], i--);
-            }else {
+            }else if (nums[i] == nums[nums[i]]) {
                 return nums[i];
             }
         }
