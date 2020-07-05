@@ -8,18 +8,18 @@
 
 public class J04 {
     public boolean findNumberIn2DArray(int[][] matrix, int target) {
-        if (matrix == null ||  matrix.length == 0){
+        if (matrix == null || matrix.length == 0) {
             return false;
         }
-        int x = matrix.length;
-        int y = matrix[0].length;
-        int i = 0;
-        int j = y - 1;
-        while (i >= 0 && i < x && j >= 0 && j < y){
-            if (matrix[i][j] < target){
-                i++;
-            }else if (matrix[i][j] > target){
-                j--;
+        int i = matrix.length;
+        int j = matrix[0].length;
+        int m = 0;
+        int n = j - 1;
+        while (m >= 0 && m < i && n >= 0 && n < j) {
+            if (matrix[m][n] > target) {
+                n--;
+            }else if (matrix[m][n] < target) {
+                m++;
             }else {
                 return true;
             }
