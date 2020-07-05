@@ -17,21 +17,25 @@ public class J06 {
     }
 
     public int[] reversePrint(ListNode head) {
-        ListNode node = new ListNode(0);
         ListNode cur = head;
-        int nums = 0;
+        ListNode root = new ListNode(0);
+        ListNode temp = null;
+        int count = 0;
+
         while (cur != null) {
-            nums++;
-            ListNode temp = cur.next;
-            cur.next = node.next;
-            node.next = cur;
-            cur = temp;
+            count++;
+            temp = cur;
+            cur = cur.next;
+            temp.next = root.next;
+            root.next = temp;
         }
-        int[] res = new int[nums];
-        for (int i = 0; i < nums; i++) {
-            res[i] = node.next.val;
-            node = node.next;
+
+        int[] res = new int[count];
+        for (int i = 0; i < count; i++) {
+            res[i] = root.next.val;
+            root = root.next;
         }
+
         return res;
     }
 }
