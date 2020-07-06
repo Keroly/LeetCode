@@ -17,18 +17,18 @@ public class J13 {
         return res;
     }
 
-    public int process (int m, int n, int k, int[][] flag, int x, int y){
-        if (x < 0 || x >= m || y < 0 || y >=n || flag[x][y] == 1 || (cul(x) + cul(y) > k)){
-            return 0;
+    public int process (int[][] flag, int i, int j, int k){
+        int count = 0;
+        if (i >= 0 && i < flag.length && j >= 0 && j < flag[0].length && flag[i][j] == 0 && cul(i) + cul(j) <= k) {
+            count += 1;
+            flag[i][j] = 1;
+            count += process(flag, i, j - 1, k) + process(flag, i, j + 1, k) + process(flag, i - 1, j, k) + process(flag, i + 1, j, k);
         }
-        flag[x][y] = 1;
-        int res = 1;
-        res += process(m, n, k, flag, x, y - 1) + process(m, n, k, flag, x, y + 1) + process(m, n, k, flag, x - 1, y) + process(m, n, k, flag, x + 1, y);
-        return res;
+        return count;
     }
 
     public int movingCount(int m, int n, int k) {
         int[][] flag = new int[m][n];
-        return process(m, n, k, flag, 0, 0);
+        return process(flag, 0, 0, k);
     }
 }
