@@ -10,11 +10,11 @@ public class J15 {
     public int hammingWeight(int n) {
         int flag = 1;
         int res = 0;
-        while (flag != 0 ){
-            if ((n & flag) != 0){
+        while (flag != 0) {
+            if ((n & flag) != 0) {
                 res++;
             }
-            flag <<= 1;
+            flag = flag << 1;
         }
         return res;
     }
