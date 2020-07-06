@@ -8,22 +8,22 @@
 
 public class J11 {
     public int minArray(int[] numbers) {
-        int low = 0;
-        int high = numbers.length - 1;
-        int mid = 0;
-        while (low < high) {
-            mid = (low + high) >> 1;
-            if (numbers[low] < numbers[high]){
-                return numbers[low];
+        int left = 0;
+        int right = numbers.length - 1;
+        int mid = (left + right) / 2;
+        while (left != right) {
+            mid = (left + right) / 2;;
+            if (numbers[left] < numbers[right]) {
+                return numbers[left];
             }
-            if (numbers[mid] > numbers[low]){
-                low = mid;
-            }else if (numbers[mid] < numbers[low]){
-                high = mid;
-            }else{
-                low++;
+            if (numbers[mid] > numbers[left]) {
+                left = mid + 1;
+            }else if (numbers[mid] < numbers[right]) {
+                right = mid;
+            }else {
+                left++;
             }
         }
-        return numbers[low];
+        return numbers[left];
     }
 }
