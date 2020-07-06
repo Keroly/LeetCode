@@ -23,15 +23,16 @@ public class J09 {
     }
 
     public int deleteHead() {
-        if (st_2.isEmpty()){
-            while (!st_1.isEmpty()){
-                st_2.push(st_1.pop());
+        if (st_2.isEmpty()) {
+            while (!st_1.isEmpty()) {
+                st_2.add(st_1.pop());
             }
         }
-        if (!st_2.isEmpty()) {
-            return st_2.pop();
-        }else {
+
+        if (st_2.isEmpty()) {
             return -1;
         }
+
+        return st_2.pop();
     }
 }
