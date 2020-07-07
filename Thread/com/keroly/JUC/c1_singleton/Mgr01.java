@@ -1,5 +1,3 @@
-package com.keroly.JUC.c1_singleton;
-
 /*
 
     饿汉式
@@ -9,6 +7,8 @@ package com.keroly.JUC.c1_singleton;
     Class.forName("")
 
  */
+
+package com.keroly.JUC.c1_singleton;
 
 public class Mgr01 {
     private static final Mgr01 INSTANCE = new Mgr01();
