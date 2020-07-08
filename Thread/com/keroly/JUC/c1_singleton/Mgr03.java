@@ -7,6 +7,7 @@ package com.keroly.JUC.c1_singleton;
 
 
  */
+
 public class Mgr03 {
     private /*volatile*/ static Mgr03 INSTANCE;
     // 在超高并发的场景下，使用volatile禁止指令重排序，一般测不出来
