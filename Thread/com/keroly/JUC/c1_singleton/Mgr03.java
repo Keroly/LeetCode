@@ -1,4 +1,5 @@
 package com.keroly.JUC.c1_singleton;
+
 /*
 
     懒汉式
