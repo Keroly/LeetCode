@@ -2,7 +2,6 @@ package com.keroly.JUC.c2_volatile;
 
 import java.util.concurrent.TimeUnit;
 
-
 public class T02_VolatileReference {
     boolean running = true;
 
