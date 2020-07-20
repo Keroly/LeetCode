@@ -1,4 +1,5 @@
 package com.keroly.JUC.c2_volatile;
+
 import java.util.concurrent.TimeUnit;
 
 public class T02_VolatileReference {
@@ -7,6 +8,7 @@ public class T02_VolatileReference {
     /**
      * volatile 引用类型（包括数组）只能保证引用本身的可见性，不能保证内部字段的可见性
      */
+
     volatile static T02_VolatileReference T = new T02_VolatileReference();
 
     void m() {
