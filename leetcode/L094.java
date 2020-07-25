@@ -19,19 +19,19 @@ public class L094 {
     }
 
     public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
-        List<Integer> result = new ArrayList<>();
-        TreeNode cur = root;
-        while (!stack.isEmpty() || cur != null){
-            if (cur != null){
-                stack.push(cur);
-                cur = cur.left;
+        TreeNode node = root;
+        while (node != null || !stack.isEmpty()) {
+            if (node != null) {
+                stack.push(node);
+                node = node.left;
             }else {
-                result.add(stack.peek().val);
-                cur = stack.pop();
-                cur = cur.right;
+                TreeNode cur = stack.pop();
+                res.add(cur.val);
+                node = cur.right;
             }
         }
-        return result;
+        return res;
     }
 }
