@@ -28,10 +28,8 @@ public class L098 {
 
     public boolean process(TreeNode node, Integer lower, Integer upper){
         if (node == null) return true;
-
         if (lower != null && node.val <= lower) return false;
         if (upper != null && node.val >= upper) return false;
-
         return process(node.left, lower, node.val) && process(node.right, node.val, upper);
     }
 
