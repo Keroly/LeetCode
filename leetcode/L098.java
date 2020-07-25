@@ -56,7 +56,6 @@ public class L098 {
                 list.add(node.left);
                 lower.add(low);
                 upper.add(node.val);
-
             }
 
             if (node.right != null){
