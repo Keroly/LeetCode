@@ -4,6 +4,7 @@
  * Atomxxx类本身方法都是原子性的，但不能保证多个方法连续调用是原子性的
  *
  */
+
 package com.keroly.JUC.c_018_00_AtomicXXX;
 
 import java.util.ArrayList;
