@@ -3,6 +3,7 @@
 
 题目描述：
 根据一棵树的前序遍历与中序遍历构造二叉树。
+
  */
 public class L105 {
     public class TreeNode {
@@ -13,23 +14,26 @@ public class L105 {
     }
 
     public TreeNode process(int[] preorder, int prei, int prej, int[] inorder, int ini, int inj){
-        if (prei > prej || ini > inj) return null;
-        TreeNode head = new TreeNode(preorder[prei]);
-        int mid = -1;
-        for (int i = ini; i <= inj; i++){
-            if (inorder[i] == preorder[prei]){
-                mid = i;
+        if (prei > prej || ini > inj) {
+            return null;
+        }
+
+        int index = 0;
+        for (int i = ini; i <= inj; i++) {
+            if (inorder[i] == preorder[prei]) {
+                index = i;
                 break;
             }
         }
 
-        head.left = process(preorder,prei + 1, prei + mid - ini, inorder, ini, mid - 1);
-        head.right = process(preorder,prei + mid - ini + 1 , prej, inorder, mid + 1, inj);
-        return head;
+        TreeNode root = new TreeNode(preorder[prei]);
+        root.left = process(preorder, prei + 1, prei + index - ini, inorder, ini, index - 1);
+        root.right = process(preorder, prei + index - ini + 1, prej, inorder, index + 1, inj);
+        return root;
     }
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        if (preorder == null || inorder ==null || preorder.length == 0 || inorder.length == 0) return null;
+        if (preorder == null || inorder == null || preorder.length == 0 || inorder.length == 0) return null;
         return process(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
     }
 }
