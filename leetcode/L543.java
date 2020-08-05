@@ -7,9 +7,6 @@
 
  */
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-
 public class L543 {
     public class TreeNode {
         int val;
