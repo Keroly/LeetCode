@@ -1,10 +1,10 @@
-package com.keroly.JUC.c2_volatile;
-
 /*
 
     volatile只保证线程间可见性，不保证同步，也就是volatile不能替代synchronized
 
  */
+
+package com.keroly.JUC.c2_volatile;
 
 import java.util.ArrayList;
 import java.util.List;
