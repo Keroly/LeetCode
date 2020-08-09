@@ -1,22 +1,8 @@
-/*
- * File Name:T04_VolatileNotSync is created on 2020-04-21 16:44 by tangwan
- *
- * Copyright (c) 2020, tangwan All Rights Reserved.
- *
- */
-
 package com.keroly.JUC.c2_volatile;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author tangwan
- * @Description : T04_VolatileNotSync
- * <p>
- * @date 2020-04-21 16:44
- * @since JDK 1.8
- */
 public class T05_VolatileVsSync {
 
     /**
