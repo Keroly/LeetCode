@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-
 public class T01_WithoutVolatile {
 
 	List lists = new ArrayList();
