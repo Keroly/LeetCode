@@ -1,9 +1,3 @@
-/*
- * File Name:T02_VolatileReference is created on 2020-04-21 16:02 by tangwan
- *
- * Copyright (c) 2020, tangwan All Rights Reserved.
- *
- */
 
 package com.keroly.JUC.c2_volatile;
 
