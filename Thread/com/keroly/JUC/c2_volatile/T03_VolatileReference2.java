@@ -1,13 +1,6 @@
 
 package com.keroly.JUC.c2_volatile;
 
-/**
- * @author tangwan
- * @Description : T02_VolatileReference
- * @date 2020-04-21 16:02
- * @since JDK 1.8
- */
-
 public class T03_VolatileReference2 {
     private static class Data {
         int a, b;
