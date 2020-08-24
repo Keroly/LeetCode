@@ -14,6 +14,7 @@ public class T03_VolatileReference2 {
     /**
      * volatile 引用类型（包括数组）只能保证引用本身的可见性，不能保证内部字段的可见性
      */
+
     volatile static Data data;
 
     public static void main(String[] args) throws InterruptedException {
