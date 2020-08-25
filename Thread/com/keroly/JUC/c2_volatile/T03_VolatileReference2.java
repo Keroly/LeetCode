@@ -1,4 +1,3 @@
-
 package com.keroly.JUC.c2_volatile;
 
 public class T03_VolatileReference2 {
