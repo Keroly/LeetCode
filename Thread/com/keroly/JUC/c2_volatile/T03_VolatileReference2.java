@@ -1,18 +1,4 @@
-/*
- * File Name:T02_VolatileReference is created on 2020-04-21 16:02 by tangwan
- *
- * Copyright (c) 2020, tangwan All Rights Reserved.
- *
- */
-
 package com.keroly.JUC.c2_volatile;
-
-/**
- * @author tangwan
- * @Description : T02_VolatileReference
- * @date 2020-04-21 16:02
- * @since JDK 1.8
- */
 
 public class T03_VolatileReference2 {
     private static class Data {
@@ -27,6 +13,7 @@ public class T03_VolatileReference2 {
     /**
      * volatile 引用类型（包括数组）只能保证引用本身的可见性，不能保证内部字段的可见性
      */
+
     volatile static Data data;
 
     public static void main(String[] args) throws InterruptedException {
