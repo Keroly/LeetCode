@@ -19,10 +19,13 @@ public class L124 {
 
     public int process(TreeNode root) {
         if (root == null) return 0;
+
         int left = process(root.left);
         int right = process(root.right);
-        int res = Math.max(Math.max(root.val + left, root.val + right), root.val);
-        result = Math.max(left + root.val + right, result);
+
+        int res = Math.max(0, Math.max(left, right)) + root.val;
+        result = Math.max(result, Math.max(res, root.val + left + right));
+
         return Math.max(0, res);
     }
 
