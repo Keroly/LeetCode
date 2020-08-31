@@ -17,11 +17,11 @@ public class L101 {
     }
 //----------------------------------------------  递归  -----------------------------------------------------------------
 
-    public boolean process(TreeNode node1, TreeNode node2){
-        if (node1 == null && node2 == null) return true;
-        if (node1 == null || node2 == null || node1.val != node2.val) return false;
-        return process(node1.left, node2.right) && process(node1.right, node2.left);
-     }
+    public boolean process(TreeNode left, TreeNode right){
+        if (left == null && right == null) return true;
+        if (left == null || right == null || left.val != right.val) return false;
+        return process(left.left, right.right) && process(left.right, right.left);
+    }
 
     public boolean isSymmetric(TreeNode root) {
         if (root == null) return true;
