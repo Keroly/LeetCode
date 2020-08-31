@@ -14,11 +14,13 @@ public class L105 {
     }
 
     public TreeNode process(int[] preorder, int prei, int prej, int[] inorder, int ini, int inj){
-        if (prei > prej || ini > inj) {
+        if (prei > prej) {
             return null;
         }
 
-        int index = 0;
+        TreeNode root = new TreeNode(preorder[prei]);
+        int index = -1;
+
         for (int i = ini; i <= inj; i++) {
             if (inorder[i] == preorder[prei]) {
                 index = i;
@@ -26,14 +28,13 @@ public class L105 {
             }
         }
 
-        TreeNode root = new TreeNode(preorder[prei]);
         root.left = process(preorder, prei + 1, prei + index - ini, inorder, ini, index - 1);
         root.right = process(preorder, prei + index - ini + 1, prej, inorder, index + 1, inj);
         return root;
     }
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        if (preorder == null || inorder == null || preorder.length == 0 || inorder.length == 0) return null;
-        return process(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
+        if (preorder == null || preorder.length == 0) return null;
+        return process(preorder, 0, preorder.length - 1, inorder, 0, inorder.length);
     }
 }
