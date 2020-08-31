@@ -18,11 +18,14 @@ public class L543 {
     private int depth = 0;
 
     public int process(TreeNode root) {
-        if (root == null) return 0;
+        if (root == null) {
+            return 0;
+        }
         int left = process(root.left);
         int right = process(root.right);
+        int ans = Math.max(left, right);
         depth = Math.max(depth, left + right + 1);
-        return Math.max(left, right) + 1;
+        return ans + 1;
     }
 
     public int diameterOfBinaryTree(TreeNode root) {
