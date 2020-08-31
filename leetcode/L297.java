@@ -27,23 +27,19 @@ public class L297 {
         if (root == null) {
             return "#";
         }
-
-        String res = root.val + ","+ serialize(root.left) + "," + serialize(root.right);
-        return res;
+        String ans = root.val + "," + serialize(root.left) + "," + serialize(root.right);
+        return ans;
     }
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        if (data == null || data.equals("")) {
-            return null;
-        }
-
-        String[] str = data.split(",");
         LinkedList<String> list = new LinkedList<>();
-        for (String s: str) {
-            list.add(s);
+        String[] str = data.split(",");
+        for (String element: str) {
+            list.add(element);
         }
-        return dfs(list);
+        TreeNode node = dfs(list);
+        return node;
     }
 
     public TreeNode dfs(LinkedList<String> list){
@@ -51,7 +47,7 @@ public class L297 {
             list.poll();
             return null;
         }
-        TreeNode root = new TreeNode(Integer.valueOf(list.poll()));
+        TreeNode root = new TreeNode(Integer.valueOf(list.pop()));
         root.left = dfs(list);
         root.right = dfs(list);
         return root;
