@@ -7,41 +7,34 @@
  */
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class L017 {
-    HashMap<String, String> map = new HashMap<String, String>(){
-        {
-            put("2", "abc");
-            put("3", "def");
-            put("4", "ghi");
-            put("5", "jkl");
-            put("6", "mno");
-            put("7", "pqrs");
-            put("8", "tuv");
-            put("9", "wxyz");
-        }};
-
-    List<String> list = new ArrayList<>();
-
-    public void process(String combin, String digits){
-        if (digits.equals("")){
-            list.add(combin);
-            return;
-        }
-        String letter = map.get(digits.substring(0, 1));
-        for (int j = 0; j < letter.length(); j++){
-            String next_combin = combin + letter.substring(j, j + 1);
-            String next_digits = digits.substring(1);
-            process(next_combin, next_digits);
-        }
-    }
-
-
     public List<String> letterCombinations(String digits) {
-        if (digits == null || digits.equals("")) return list;
-        process("", digits);
-        return list;
+        List<String> res = new ArrayList<>();
+
+        if (digits == null || digits.equals("")) {
+            return res;
+        }
+
+        res.add("");
+
+        String[] chars = new String[]{"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        for (int i = 0; i < digits.length(); i ++) {
+
+            String element = chars[digits.charAt(i) - '2'];
+            List<String> cur = new ArrayList<>();
+
+            for (int k = 0; k < element.length(); k++) {
+                for (int j = 0; j < res.size(); j++) {
+                    String str = res.get(j) + element.charAt(k) + "";
+                    cur.add(str);
+                }
+            }
+
+            res = cur;
+        }
+
+        return res;
     }
 }
