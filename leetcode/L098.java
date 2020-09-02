@@ -15,6 +15,7 @@ import java.util.LinkedList;
 
 public class L098 {
     public class TreeNode {
+
         int val;
         TreeNode left;
         TreeNode right;
