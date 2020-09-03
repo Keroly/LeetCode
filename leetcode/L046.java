@@ -9,32 +9,33 @@
 import java.util.*;
 
 public class L046 {
-    public void process(ArrayList<Integer> nums, int length, int index, List<List<Integer>> result){
-        if (index == length){
-            result.add(new ArrayList<>(nums));
+
+    List<List<Integer>> res;
+    List<Integer> ans;
+    int[] flag;
+
+    public List<List<Integer>> permute(int[] nums) {
+        res = new LinkedList<List<Integer>>();
+        ans = new LinkedList<>();
+        flag = new int[nums.length];
+        dfs(nums, 0);
+        return res;
+    }
+
+    public void dfs(int[] nums, int index) {
+        if (index == nums.length) {
+            res.add(new LinkedList<>(ans));
             return;
         }
-
-        HashSet<Integer> set = new HashSet<>();
-        for (int i = index; i < length; i++){
-            if (!set.contains(nums.get(i))){
-                set.add(nums.get(i));
-                Collections.swap(nums, index, i);
-                process(nums, length, index + 1, result);
-                Collections.swap(nums, index, i);
+        for (int i = 0; i < nums.length; i++) {
+            if (flag[i] == 0) {
+                flag[i] = 1;
+                ans.add(nums[i]);
+                dfs(nums, index + 1);
+                ans.remove(ans.size() - 1);
+                flag[i] = 0;
             }
         }
     }
 
-    public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
-        if (nums == null || nums.length == 0) return result;
-        ArrayList<Integer> elements = new ArrayList<Integer>();
-        for (Integer element: nums) {
-            elements.add(element);
-        }
-        process(elements, nums.length, 0, result);
-
-        return result;
-    }
 }
