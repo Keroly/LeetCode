@@ -6,38 +6,37 @@
 
  */
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class L047 {
-    public void process(ArrayList<Integer> nums, int length, int index, List<List<Integer>> result){
-        if (index == length){
-            result.add(new ArrayList<>(nums));
-            return;
-        }
-        HashSet<Integer> set = new HashSet<>();
 
-
-        for (int i = index; i < length; i++){
-            if ( !set.contains(nums.get(i))){
-                set.add(nums.get(i));
-                Collections.swap(nums, index, i);
-                process(nums, length, index + 1, result);
-                Collections.swap(nums, index, i);
-            }
-        }
-    }
+    List<List<Integer>> res;
+    Integer[] ans;
+    int[] flag;
 
     public List<List<Integer>> permuteUnique(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
-        if (nums == null || nums.length == 0) return result;
-        ArrayList<Integer> elements = new ArrayList<Integer>();
-        for (Integer element: nums) {
-            elements.add(element);
+        Arrays.sort(nums);
+        res = new LinkedList<List<Integer>>();
+        ans = new Integer[nums.length];
+        flag = new int[nums.length];
+        dfs (nums, 0, 0);
+        return res;
+    }
+
+    public void dfs(int[] nums, int index, int start) {
+        if (index == nums.length) {
+            List<Integer> list = Arrays.asList(ans);
+            res.add(new ArrayList<>(list));
+            return;
         }
-        process(elements, nums.length, 0, result);
-        return result;
+
+        for (int i = start; i < flag.length; i++) {
+            if (flag[i] == 0) {
+                flag[i] = 1;
+                ans[i] = nums[index];
+                dfs(nums, index + 1, index + 1 < nums.length && nums[index] == nums[index + 1] ? i + 1 : 0);
+                flag[i] = 0;
+            }
+        }
     }
 }
