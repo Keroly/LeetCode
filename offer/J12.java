@@ -8,29 +8,28 @@
  */
 
 public class J12 {
-    public boolean process(char[][] board,int[][] flag, int i, int j, String word){
-        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || flag[i][j] == 1 || word.charAt(0) != board[i][j]) {
-            return false;
-        }
-
-        if (word.length() == 1) {
+    public boolean dfs (char[][] board, int x, int y, String word, int index, int[][] flag) {
+        if (index == word.length()) {
             return true;
         }
-
-        flag[i][j] = 1;
-        String str = word.substring(1);
-        boolean res = process(board, flag, i, j - 1, str) || process(board, flag, i, j + 1, str) || process(board, flag, i - 1, j, str) || process(board, flag, i + 1, j, str);
-        flag[i][j] = 0;
-
+        if (x < 0 || y < 0 || x >= board.length || y >= board[0].length || board[x][y] != word.charAt(index) || flag[x][y] == 1) {
+            return false;
+        }
+        flag[x][y] = 1;
+        boolean res = dfs(board, x, y + 1, word, index + 1, flag) || dfs(board, x, y - 1, word, index + 1, flag) ||
+                dfs(board, x + 1, y, word, index + 1, flag) || dfs(board, x - 1, y, word, index + 1, flag);
+        flag[x][y] = 0;
         return res;
     }
 
     public boolean exist(char[][] board, String word) {
+        if (board == null || board[0].length == 0) {
+            return false;
+        }
         int[][] flag = new int[board.length][board[0].length];
-        boolean res = false;
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
-                if (board[i][j] == word.charAt(0) && process(board, flag, i, j, word) == true) {
+        for (int x = 0; x < board.length; x++) {
+            for (int y = 0; y < board[0].length; y++) {
+                if (dfs(board, x, y, word, 0, flag)) {
                     return true;
                 }
             }
