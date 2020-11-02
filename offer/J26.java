@@ -14,20 +14,20 @@ public class J26 {
        TreeNode(int x) { val = x; }
     }
 
-    public boolean process(TreeNode nodeA, TreeNode nodeB){
-        if (nodeB == null) {
+    public boolean dfs(TreeNode A, TreeNode B) {
+        if (B == null) {
             return true;
         }
-        if (nodeA == null || nodeA.val != nodeB.val) {
+        if (A == null || A.val != B.val) {
             return false;
         }
-        return process(nodeA.left, nodeB.left) && process(nodeA.right, nodeB.right);
+        return dfs(A.left, B.left) && dfs(A.right, B.right);
     }
-
-    public boolean isSubStructure(TreeNode nodeA, TreeNode nodeB) {
-        if (nodeA == null || nodeB == null){
+    public boolean isSubStructure(TreeNode A, TreeNode B) {
+        if (A == null || B == null ) {
             return false;
         }
-        return process(nodeA, nodeB) || isSubStructure(nodeA.left, nodeB) || isSubStructure(nodeA.right, nodeB);
+        boolean res = dfs(A, B);
+        return res || isSubStructure(A.left, B) || isSubStructure(A.right, B);
     }
 }
