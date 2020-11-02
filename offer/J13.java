@@ -8,27 +8,35 @@
  */
 
 public class J13 {
-    public int cul (int i){
-        int res = 0;
-        while (i != 0){
-            res += (i % 10);
-            i = i / 10;
+    public boolean cal (int x, int y, int k) {
+        int i = 0;
+        int j = 0;
+        while (x != 0) {
+            i += x % 10;
+            x = x / 10;
         }
-        return res;
+        while (y != 0) {
+            j += y % 10;
+            y = y / 10;
+        }
+        return i + j > k ? true : false;
     }
-
-    public int process (int[][] flag, int i, int j, int k){
-        int count = 0;
-        if (i >= 0 && i < flag.length && j >= 0 && j < flag[0].length && flag[i][j] == 0 && cul(i) + cul(j) <= k) {
-            count += 1;
-            flag[i][j] = 1;
-            count += process(flag, i, j - 1, k) + process(flag, i, j + 1, k) + process(flag, i - 1, j, k) + process(flag, i + 1, j, k);
+    public int dfs (int x, int y, int m, int n, int k, int[][] flag){
+        if (x < 0 || y < 0 || x >= m || y >= n || cal(x, y, k) || flag[x][y] == 1) {
+            return 0;
         }
-        return count;
+        int ans = 1;
+        flag[x][y] = 1;
+        ans += dfs(x + 1, y, m, n, k, flag) + dfs(x - 1, y, m, n, k, flag) + dfs(x , y + 1, m, n, k, flag) +
+                dfs(x, y - 1, m, n, k, flag);
+        return ans;
     }
 
     public int movingCount(int m, int n, int k) {
+        if (m <= 0 || n <= 0) {
+            return 0;
+        }
         int[][] flag = new int[m][n];
-        return process(flag, 0, 0, k);
+        return dfs(0, 0, m, n, k, flag);
     }
 }
