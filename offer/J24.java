@@ -14,14 +14,18 @@ public class J24 {
     }
 
     public ListNode reverseList(ListNode head) {
-        ListNode root = new ListNode(-1);
-        ListNode cur = head;
-        while (head != null){
-            cur = head.next;
-            head.next = root.next;
-            root.next = head;
-            head = cur;
+        if (head == null || head.next == null) {
+            return head;
         }
-        return root.next;
+        ListNode slow = head;
+        ListNode fast = head.next;
+        head.next = null;
+        while (fast != null) {
+            ListNode cur = fast.next;
+            fast.next = slow;
+            slow = fast;
+            fast = cur;
+        }
+        return slow;
     }
 }
