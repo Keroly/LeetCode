@@ -11,16 +11,13 @@ public class J10_1 {
         if (n < 2) {
             return n;
         }
-
         int a = 0;
         int b = 1;
-        int sum = 0;
-        while (n-- >= 2) {
-            sum = (a + b) % 1000000007;
+        while(n-- > 1){
+            int sum = (a + b) % 1000000007;
             a = b;
             b = sum;
         }
-
         return b;
     }
 }
