@@ -10,29 +10,28 @@
 import java.util.Stack;
 
 public class J09 {
-    Stack<Integer> st_1;
-    Stack<Integer> st_2;
+    Stack<Integer> s1;
+    Stack<Integer> s2;
 
     public J09() {
-        st_1 = new Stack();
-        st_2 = new Stack();
+        s1 = new Stack<Integer>();
+        s2 = new Stack<Integer>();
     }
 
     public void appendTail(int value) {
-        st_1.push(value);
+        s1.push(value);
     }
 
     public int deleteHead() {
-        if (st_2.isEmpty()) {
-            while (!st_1.isEmpty()) {
-                st_2.add(st_1.pop());
-            }
+        if (!s2.isEmpty()) {
+            return s2.pop();
         }
-
-        if (st_2.isEmpty()) {
+        if (s1.isEmpty()) {
             return -1;
         }
-
-        return st_2.pop();
+        while (!s1.isEmpty()) {
+            s2.push(s1.pop());
+        }
+        return s2.pop();
     }
 }
