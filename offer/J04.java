@@ -11,17 +11,16 @@ public class J04 {
         if (matrix == null || matrix.length == 0) {
             return false;
         }
-        int i = matrix.length;
-        int j = matrix[0].length;
-        int m = 0;
-        int n = j - 1;
-        while (m >= 0 && m < i && n >= 0 && n < j) {
-            if (matrix[m][n] > target) {
-                n--;
-            }else if (matrix[m][n] < target) {
-                m++;
-            }else {
+        int x = 0;
+        int y = matrix[0].length - 1;
+        while (x >= 0 && x < matrix.length && y >= 0 && y < matrix[0].length) {
+            if (matrix[x][y] == target) {
                 return true;
+            }
+            if (matrix[x][y] < target) {
+                x ++;
+            }else {
+                y --;
             }
         }
         return false;
