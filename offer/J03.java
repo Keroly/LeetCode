@@ -7,20 +7,17 @@
  */
 
 public class J03 {
-    public void swap(int[] nums, int i, int j){
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
-    }
-
     public int findRepeatNumber(int[] nums) {
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] != i && nums[i] != nums[nums[i]]){
-                swap(nums, nums[i], nums[nums[i]]);
+        for (int i = 0; i < nums.length; i++){
+            if (i != nums[i] && nums[nums[i]] != nums[i]){
+                int a = nums[i];
+                int b = nums[a];
+                nums[a] = a;
+                nums[i] = b;
                 i--;
-            }else if (nums[i] == i) {
                 continue;
-            }else if (nums[i] == nums[nums[i]]) {
+            }
+            if (i != nums[i]){
                 return nums[i];
             }
         }
