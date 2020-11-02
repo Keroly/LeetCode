@@ -15,19 +15,20 @@ public class J22 {
     }
 
     public ListNode getKthFromEnd(ListNode head, int k) {
-        ListNode slow = head;
-        ListNode fast = head;
-        while (k-- > 1) {
-            if (fast.next != null){
-                fast = fast.next;
-            }else {
+        if (head == null) {
+            return null;
+        }
+        ListNode cur = head;
+        for (int i = k; i > 1; i--) {
+            cur = cur.next;
+            if (cur == null) {
                 return null;
             }
         }
-        while (fast.next != null) {
-            fast = fast.next;
-            slow = slow.next;
+        while(cur.next != null) {
+            cur = cur.next;
+            head = head.next;
         }
-        return slow;
+        return head;
     }
 }
