@@ -14,18 +14,18 @@ public class J18 {
     }
 
     public ListNode deleteNode(ListNode head, int val) {
+        if (head == null || (head.val == val && head.next == null)) {
+            return null;
+        }
         if (head.val == val) {
             return head.next;
         }
-        ListNode pre = head;
-        ListNode cur = head.next;
-        while (cur != null){
-            if (cur.val == val){
-                pre.next = cur.next;
-            }else {
-                pre = pre.next;
-            }
+        ListNode cur = head;
+        while (cur.next != null && cur.next.val != val) {
             cur = cur.next;
+        }
+        if (cur.next != null){
+            cur.next = cur.next.next;
         }
         return head;
     }
