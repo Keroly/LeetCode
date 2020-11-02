@@ -21,24 +21,26 @@ public class J32_1 {
         if (root == null) {
             return new int[0];
         }
-        LinkedList<TreeNode> linkedList = new LinkedList<>();
-        ArrayList<Integer> arrayList = new ArrayList<>();
-        linkedList.addLast(root);
-        while(!linkedList.isEmpty()){
-            TreeNode node = linkedList.pollFirst();
-            arrayList.add(node.val);
-            if (node.left != null){
-                linkedList.addLast(node.left);
-            }
-            if (node.right != null){
-                linkedList.addLast(node.right);
+        LinkedList<TreeNode> list = new LinkedList<TreeNode>();
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        list.add(root);
+        while (list.size() > 0) {
+            int lens = list.size();
+            for (int i = 0; i < lens; i++) {
+                TreeNode cur = list.pollFirst();
+                res.add(cur.val);
+                if (cur.left != null) {
+                    list.addLast(cur.left);
+                }
+                if (cur.right != null) {
+                    list.addLast(cur.right);
+                }
             }
         }
-        int size = arrayList.size();
-        int[] res = new int[size];
-        for (int i = 0; i < size; i++){
-            res[i] = arrayList.get(i);
+        int[] ans = new int[res.size()];
+        for (int i = 0; i < res.size(); i++) {
+            ans[i] = res.get(i);
         }
-        return res;
+        return ans;
     }
 }
