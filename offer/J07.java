@@ -14,31 +14,28 @@ public class J07 {
         TreeNode(int x) { val = x; }
     }
 
-    public TreeNode process(int[] preorder, int prei, int prej, int[] inorder, int ini, int inj){
+    public TreeNode process(int[] preorder, int prei, int prej, int[] inorder, int ini, int inj) {
         if (prei > prej) {
             return null;
         }
-
-        TreeNode root = new TreeNode(preorder[prei]);
-        int count = 0;
-
+        TreeNode ans = new TreeNode(preorder[prei]);
+        int flag = ini;
         for (int i = ini; i <= inj; i++) {
-            if (preorder[prei] == inorder[i]) {
-                count = i;
+            if (inorder[i] == preorder[prei]) {
+                flag = i;
                 break;
             }
         }
-
-        root.left = process(preorder, prei + 1, prei + count - ini,inorder, ini, count - 1);
-        root.right = process(preorder, prei + count - ini + 1,prej, inorder, count + 1, inj);
-
-        return root;
+        ans.left = process(preorder, prei + 1, prei + flag - ini, inorder, ini, flag - 1);
+        ans.right = process(preorder, prei + flag - ini + 1, prej, inorder, flag + 1, inj);
+        return ans;
     }
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         if (preorder == null || preorder.length == 0) {
             return null;
         }
-        return process(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
+        TreeNode root = process(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
+        return root;
     }
 }
