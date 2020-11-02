@@ -9,36 +9,41 @@
 import java.util.Stack;
 
 public class J30 {
-    Stack<Integer> stack;
-    Stack<Integer> minStack;
-
+    Stack<Integer> s1;
+    Stack<Integer> s2;
+    /** initialize your data structure here. */
     public J30() {
-        stack = new Stack();
-        minStack = new Stack();
+        s1 = new Stack<Integer>();
+        s2 = new Stack<Integer>();
     }
 
     public void push(int x) {
-        if (stack.isEmpty()){
-            stack.push(x);
-            minStack.push(x);
-            return;
+        s1.push(x);
+        if (s2.isEmpty()) {
+            s2.push(x);
+        }else {
+            s2.push(Math.min(x, s2.peek()));
         }
-        stack.push(x);
-        minStack.push(Math.min(x, minStack.peek()));
     }
 
     public void pop() {
-        if (!stack.isEmpty()) {
-            stack.pop();
-            minStack.pop();
+        if (!s1.isEmpty()) {
+            s1.pop();
+            s2.pop();
         }
     }
 
     public int top() {
-        return stack.peek();
+        if (!s1.isEmpty()) {
+            return s1.peek();
+        }
+        return -1;
     }
 
     public int min() {
-        return minStack.peek();
+        if (!s2.isEmpty()) {
+            return s2.peek();
+        }
+        return -1;
     }
 }
