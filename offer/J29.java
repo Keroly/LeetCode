@@ -14,34 +14,34 @@ public class J29 {
         }
         int i = 0;
         int j = 0;
-        int cur = 0;
-        int calm = matrix.length;
-        int vertical = matrix[0].length;
-        int[] res = new int[calm * vertical];
-        while (calm > 0 && vertical > 0) {
-            while (calm == 1 && vertical-- != 0) {
-                res[cur++] = matrix[i][j++];
+        int m = 0;
+        int x = matrix.length;
+        int y = matrix[0].length;
+        int[] res = new int[x * y];
+        while (x > 0 && y > 0) {
+            while (x == 1 && y-- > 0) {
+                res[m++] = matrix[i][j++];
             }
-            while (vertical == 1 && calm-- != 0) {
-                res[cur++] = matrix[i++][j];
+            while (y == 1 && x-- > 0) {
+                res[m++] = matrix[i++][j];
             }
-            if (calm <= 0 || vertical <= 0){
+            if (x <= 0 || y <= 0) {
                 break;
             }
-            for (int x = j; x < j + vertical - 1; x++){
-                res[cur++] = matrix[i][x];
+            for (int p = j; p < j + y - 1; p++) {
+                res[m++] = matrix[i][p];
             }
-            for (int x = i; x < i + calm - 1; x++){
-                res[cur++] = matrix[x][j + vertical - 1];
+            for (int p = i; p < i + x - 1; p++) {
+                res[m++] = matrix[p][j + y - 1];
             }
-            for (int x = j + vertical - 1; x > j; x--){
-                res[cur++] = matrix[i + calm - 1][x];
+            for (int p = j + y - 1; p > j; p--) {
+                res[m++] = matrix[i + x - 1][p];
             }
-            for (int x = i + calm - 1; x > i; x--){
-                res[cur++] = matrix[x][j];
+            for (int p = i + x - 1; p > i; p--) {
+                res[m++] = matrix[p][j];
             }
-            calm -= 2;
-            vertical -= 2;
+            x -= 2;
+            y -= 2;
             i++;
             j++;
         }
