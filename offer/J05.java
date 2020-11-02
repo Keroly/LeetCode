@@ -8,31 +8,28 @@
 
 public class J05 {
     public String replaceSpace(String s) {
-        if (s == null || s.length() == 0) {
+        if (s == null || s.length() == 0){
             return "";
         }
 
         int lens = s.length();
-        int count = 0;
+        int flag = 0;
         for (int i = 0; i < lens; i++) {
-            if (s.charAt(i) == ' ') {
-                count++;
+            if (s.charAt(i)== ' '){
+                flag++;
             }
         }
 
-        char[] element = new char[lens + count * 2];
-        int index = lens + count * 2;
-
-        for (int i = s.length() - 1; i >= 0; i--) {
-            if (s.charAt(i) == ' ') {
-                element[--index] = '0';
-                element[--index] = '2';
-                element[--index] = '%';
+        char[] ans = new char[lens + 2 * flag];
+        for (int i = ans.length - 1, j = lens - 1; i >= 0 && j >= 0; i--,j--){
+            if (s.charAt(j) != ' '){
+                ans[i] = s.charAt(j);
             }else {
-                element[--index] = s.charAt(i);
+                ans[i--] = '0';
+                ans[i--] = '2';
+                ans[i] = '%';
             }
         }
-
-        return String.valueOf(element);
+        return String.valueOf(ans);
     }
 }
