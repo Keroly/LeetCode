@@ -6,6 +6,8 @@
 
  */
 
+import java.util.Stack;
+
 public class J06 {
     public class ListNode {
         int val;
@@ -17,25 +19,19 @@ public class J06 {
     }
 
     public int[] reversePrint(ListNode head) {
+        Stack<ListNode> stack = new Stack<ListNode>();
         ListNode cur = head;
-        ListNode root = new ListNode(0);
-        ListNode temp = null;
-        int count = 0;
-
+        int lens = 0;
         while (cur != null) {
-            count++;
-            temp = cur;
+            stack.push(cur);
             cur = cur.next;
-            temp.next = root.next;
-            root.next = temp;
+            lens++;
         }
-
-        int[] res = new int[count];
-        for (int i = 0; i < count; i++) {
-            res[i] = root.next.val;
-            root = root.next;
+        int[] ans = new int[lens];
+        int i = 0;
+        while (!stack.isEmpty()){
+            ans[i++] = stack.pop().val;
         }
-
-        return res;
+        return ans;
     }
 }
