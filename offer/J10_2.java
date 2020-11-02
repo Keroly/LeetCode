@@ -8,7 +8,7 @@
 
 public class J10_2 {
     public int numWays(int n) {
-        if (n == 0 || n == 1) {
+        if (n < 2) {
             return 1;
         }
         int a = 1;
