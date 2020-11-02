@@ -14,20 +14,19 @@ public class J28 {
         TreeNode(int x) { val = x; }
     }
 
-    public boolean process(TreeNode node1, TreeNode node2){
-        if (node1 == null && node2 == null) {
+    public boolean dfs (TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
             return true;
         }
-        if (node1 == null || node2 == null || node1.val != node2.val) {
+        if (left == null || right == null || left.val != right.val) {
             return false;
         }
-        return process(node1.left, node2.right) && process(node1.right, node2.left);
+        return dfs(left.left, right.right) && dfs(left.right, right.left);
     }
-
     public boolean isSymmetric(TreeNode root) {
         if (root == null) {
             return true;
         }
-        return process(root.left, root.right);
+        return dfs(root.left, root.right);
     }
 }
