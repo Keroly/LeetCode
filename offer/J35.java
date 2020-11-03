@@ -19,47 +19,54 @@ public class J35 {
         }
     }
 
-    public void copy_node(Node head) {
+    public void copy(Node head){
         Node cur = head;
-        while (cur != null){
-            Node next = cur.next;
-            cur.next = new Node(cur.val);
-            cur.next.next = next;
-            cur = next;
+        while (cur != null) {
+            Node node = new Node(cur.val);
+            node.next = cur.next;
+            cur.next = node;
+            cur = node.next;
         }
     }
-    public void copy_random(Node head) {
-        Node cur = head;
-        while (cur != null){
-            Node next = cur.next.next;
-            if (cur.random != null) {
-                cur.next.random = cur. random.next;
+
+    public void copyRandom(Node head) {
+        if (head == null || head.next == null) {
+            return;
+        }
+        Node slow = head;
+        Node fast = head.next;
+        while (slow != null) {
+            if (slow.random != null) {
+                fast.random = slow.random.next;
             }
-            cur = next;
+            if (fast.next == null) {
+                return;
+            }
+            fast = fast.next.next;
+            slow = slow.next.next;
         }
     }
-    public Node split(Node head) {
-        Node res = head.next;
-        Node pre = head;
-        Node cur = head.next;
-        while (cur.next != null){
-            Node temp = cur.next;
-            pre.next = temp;
-            cur.next = temp.next;
-            pre = pre.next;
-            cur = cur.next;
+
+    public Node split (Node head) {
+        if (head == null) {
+            return null;
         }
-        pre.next = null;
+        Node slow = head;
+        Node fast = head.next;
+        Node res = fast;
+        while (fast.next != null) {
+            slow.next = fast.next;
+            fast.next = fast.next.next;
+            slow = slow.next;
+            fast = fast.next;
+        }
+        slow.next = null;
         return res;
     }
 
     public Node copyRandomList(Node head) {
-        if (head == null) {
-            return head;
-        }
-        copy_node(head);
-        copy_random(head);
+        copy(head);
+        copyRandom(head);
         return split(head);
     }
-
 }
