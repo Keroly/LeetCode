@@ -7,28 +7,30 @@
  */
 
 public class J33 {
-    public boolean process(int[] postorder, int i, int j){
-        if (i >= j) {
+    public boolean dfs(int[] postorder, int left, int right) {
+        if (left >= right) {
             return true;
         }
-        int low = i;
-        int high = j;
-        int mid = i - 1;
-        for (int w = j - 1; w >= i; w--) {
-            if (postorder[w] <  postorder[j]){
-                mid = w;
+        int target = postorder[right];
+        int flag = right - 1;
+        for (int i = left; i < right; i++) {
+            if (postorder[i] > target) {
+                flag = i - 1;
                 break;
             }
         }
-        for (int w = mid; w >= i; w--){
-            if (postorder[w] > postorder[j]){
+        for (int i = flag + 1; i < right; i++) {
+            if (postorder[i] < target) {
                 return false;
             }
         }
-        return process(postorder, i, mid) && process(postorder, mid + 1, j - 1);
+        return dfs(postorder, left, flag) && dfs(postorder, flag + 1, right - 1);
     }
 
     public boolean verifyPostorder(int[] postorder) {
-        return process(postorder, 0, postorder.length - 1);
+        if (postorder.length == 0) {
+            return true;
+        }
+        return dfs(postorder, 0, postorder.length - 1);
     }
 }
