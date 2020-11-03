@@ -6,6 +6,9 @@
 
  */
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class J34 {
     public class TreeNode {
         int val = 0;
@@ -16,6 +19,27 @@ public class J34 {
             this.val = val;
         }
     }
-
+    List<List<Integer>> res = new LinkedList<>();
+    LinkedList<Integer> list = new LinkedList<>();
+    public void dfs(TreeNode root, int sum) {
+        if (root == null) {
+            return;
+        }
+        list.add(root.val);
+        sum -= root.val;
+        if (root.left == null && root.right == null && sum == 0) {
+            res.add(new LinkedList<>(list));
+        }
+        dfs(root.left, sum);
+        dfs(root.right,sum);
+        list.pollLast();
+    }
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        if (root == null) {
+            return res;
+        }
+        dfs(root, sum);
+        return res;
+    }
 
 }
