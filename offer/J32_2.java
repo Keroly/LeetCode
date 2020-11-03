@@ -20,26 +20,25 @@ public class J32_2 {
 
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
+        LinkedList<TreeNode>  linkedList = new LinkedList<TreeNode>();
         if (root == null) {
             return res;
         }
-        LinkedList<TreeNode> linkedList = new LinkedList<>();
         linkedList.add(root);
-        int size = 1;
-        while (size > 0){
-            List<Integer> list = new ArrayList<>();
-            for (int i = size; i > 0; i--){
-                TreeNode node = linkedList.poll();
-                list.add(node.val);
-                if (node.left != null){
+        while (linkedList.size() > 0) {
+            int size = linkedList.size();
+            List<Integer>  arrayList = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = linkedList.pollFirst();
+                arrayList.add(node.val);
+                if (node.left != null) {
                     linkedList.add(node.left);
                 }
-                if (node.right != null){
+                if (node.right != null) {
                     linkedList.add(node.right);
                 }
             }
-            size = linkedList.size();
-            res.add(list);
+            res.add(arrayList);
         }
         return res;
     }
