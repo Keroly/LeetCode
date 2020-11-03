@@ -7,6 +7,7 @@
  */
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -23,32 +24,34 @@ public class J32_3 {
         if (root == null) {
             return res;
         }
-        Stack<TreeNode> s1 = new Stack<>();
-        Stack<TreeNode> s2 = new Stack<>();
+
+        LinkedList<TreeNode> linkedList = new LinkedList<>();
+        linkedList.add(root);
         int flag = 1;
-        s1.add(root);
-        while (!s1.isEmpty() || !s2.isEmpty()) {
-            List<Integer> list = new ArrayList<Integer>();
-            if (flag % 2 == 1) {
-                while (!s1.isEmpty()) {
-                    TreeNode node = s1.pop();
+
+        while (linkedList.size() > 0) {
+            List<Integer> list = new LinkedList<Integer>();
+            int size = linkedList.size();
+            if (flag % 2 == 0) {
+                while (size-- > 0) {
+                    TreeNode node = linkedList.pollLast();
                     list.add(node.val);
-                    if (node.left != null) {
-                        s2.push(node.left);
-                    }
                     if (node.right != null) {
-                        s2.push(node.right);
+                        linkedList.addFirst(node.right);
+                    }
+                    if (node.left != null) {
+                        linkedList.addFirst(node.left);
                     }
                 }
             }else {
-                while (!s2.isEmpty()) {
-                    TreeNode node = s2.pop();
+                while (size-- > 0) {
+                    TreeNode node = linkedList.pollFirst();
                     list.add(node.val);
-                    if (node.right != null) {
-                        s1.push(node.right);
-                    }
                     if (node.left != null) {
-                        s1.push(node.left);
+                        linkedList.addLast(node.left);
+                    }
+                    if (node.right != null) {
+                        linkedList.addLast(node.right);
                     }
                 }
             }
