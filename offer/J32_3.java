@@ -19,36 +19,36 @@ public class J32_3 {
     }
 
     public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
         if (root == null) {
             return res;
         }
-        Stack<TreeNode> stack_1 = new Stack();
-        Stack<TreeNode> stack_2 = new Stack();
-        stack_1.add(root);
+        Stack<TreeNode> s1 = new Stack<>();
+        Stack<TreeNode> s2 = new Stack<>();
         int flag = 1;
-        while (!stack_1.isEmpty() || !stack_2.isEmpty()){
-            List<Integer> list = new ArrayList<>();
-            if (flag % 2 == 1){
-                while (!stack_1.isEmpty()) {
-                    TreeNode node = stack_1.pop();
+        s1.add(root);
+        while (!s1.isEmpty() || !s2.isEmpty()) {
+            List<Integer> list = new ArrayList<Integer>();
+            if (flag % 2 == 1) {
+                while (!s1.isEmpty()) {
+                    TreeNode node = s1.pop();
                     list.add(node.val);
                     if (node.left != null) {
-                        stack_2.add(node.left);
+                        s2.push(node.left);
                     }
-                    if(node.right != null) {
-                        stack_2.add(node.right);
+                    if (node.right != null) {
+                        s2.push(node.right);
                     }
                 }
             }else {
-                while (!stack_2.isEmpty()) {
-                    TreeNode node = stack_2.pop();
+                while (!s2.isEmpty()) {
+                    TreeNode node = s2.pop();
                     list.add(node.val);
-                    if(node.right != null) {
-                        stack_1.add(node.right);
+                    if (node.right != null) {
+                        s1.push(node.right);
                     }
                     if (node.left != null) {
-                        stack_1.add(node.left);
+                        s1.push(node.left);
                     }
                 }
             }
