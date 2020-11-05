@@ -7,28 +7,21 @@
  */
 
 public class J16 {
-    public double process(double x, int n){
-        if (x == 0 || x == 1){
-            return x;
-        }
+    public double cal (double x, int n) {
         if (n == 0) {
             return 1;
         }
-        double nums = process(x, n / 2);
-        if (n % 2 == 0) {
-            return  nums * nums ;
+        double res = cal(x, n / 2);
+        if (n % 2 == 1) {
+            return res * res * x;
         }else {
-            return nums * nums * x;
+            return res * res;
         }
     }
-
     public double myPow(double x, int n) {
-        int flag = 0;
-        if (n < 0){
-            flag = -1;
-        }else {
-            flag = 1;
+        if (n > 0) {
+            return cal(x, -n);
         }
-        return flag > 0 ? process(x, n) : 1 / process(x, -n);
+        return 1 / cal(x, n);
     }
 }
