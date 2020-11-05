@@ -11,24 +11,26 @@ import java.util.PriorityQueue;
 
 public class J40 {
     public int[] getLeastNumbers(int[] arr, int k) {
-        if (arr == null || arr.length == 0 || k <= 0) {
+        if (arr == null || arr.length < k || k <= 0) {
             return new int[0];
         }
         int[] res = new int[k];
-        PriorityQueue<Integer> queue = new PriorityQueue<>(k, new Comparator<Integer>(){
-            public int compare(Integer o1, Integer o2) {
+        PriorityQueue<Integer> queue = new PriorityQueue<Integer>(k, new Comparator<Integer>(){
+            public int compare(Integer o1,Integer o2){
                 return o2 - o1;
             }
         });
-        for (Integer element : arr) {
+        for (int i = 0; i < arr.length; i++) {
             if (queue.size() < k) {
-                queue.add(element);
-            }else if (element < queue.peek()){
+                queue.add(arr[i]);
+                continue;
+            }
+            if (arr[i] < queue.peek()) {
                 queue.poll();
-                queue.add(element);
+                queue.add(arr[i]);
             }
         }
-        for(int i = 0; i < k; i++){
+        for (int i = 0; i < k; i++) {
             res[i] = queue.poll();
         }
         return res;
