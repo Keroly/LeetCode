@@ -24,49 +24,50 @@ public class J37 {
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
         if (root == null) {
-            return "[]";
+            return "";
         }
-        StringBuilder str = new StringBuilder("[");
+        String str = "";
         LinkedList<TreeNode> list = new LinkedList<>();
         list.add(root);
         while (!list.isEmpty()) {
-            TreeNode node = list.poll();
-            if (node != null) {
-                str.append(node.val + ",");
-                list.add(node.left);
-                list.add(node.right);
-            }else {
-                str.append("null,");
+            int size = list.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = list.poll();
+                if (node == null) {
+                    str += "#,";
+                }else {
+                    str += node.val +",";
+                    list.add(node.left);
+                    list.add(node.right);
+                }
             }
         }
-        str.deleteCharAt(str.length() - 1);
-        str.append("]");
-        return str.toString();
+        return str;
     }
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        if (data.equals("[]")) {
+        if (data.equals("")){
             return null;
         }
-        int i = 0;
-        String[] str = data.substring(1, data.length() - 1).split(",");
         LinkedList<TreeNode> list = new LinkedList<>();
-        TreeNode root = new TreeNode(Integer.parseInt(str[i++]));
-        list.add(root);
-        while(!list.isEmpty()) {
+        String[] str = data.split(",");
+        TreeNode res = new TreeNode(Integer.parseInt(str[0]));
+        list.add(res);
+        int index = 1;
+        while (!list.isEmpty()) {
             TreeNode node = list.poll();
-            if (!str[i].equals("null")){
-                node.left = new TreeNode(Integer.parseInt(str[i]));
+            if (!str[index].equals("#")){
+                node.left = new TreeNode(Integer.parseInt(str[index]));
                 list.add(node.left);
             }
-            i++;
-            if (!str[i].equals("null")){
-                node.right = new TreeNode(Integer.parseInt(str[i]));
+            index++;
+            if (!str[index].equals("#")){
+                node.right = new TreeNode(Integer.parseInt(str[index]));
                 list.add(node.right);
             }
-            i++;
+            index++;
         }
-        return root;
+        return res;
     }
 }
