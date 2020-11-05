@@ -8,18 +8,18 @@
 
 public class J39 {
     public int majorityElement(int[] nums) {
-        int res = 0;
-        int times = 0;
-        for (Integer element : nums) {
-            if (times == 0) {
-                res = element;
-                times++;
-            }else if (res == element) {
-                times++;
+        int flag = 1;
+        int num = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if (flag == 0) {
+                flag = 1;
+                num = nums[i];
+            }else if (nums[i] == num){
+                flag += 1;
             }else {
-                times--;
+                flag -= 1;
             }
         }
-        return res;
+        return num;
     }
 }
