@@ -10,18 +10,18 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class J41 {
-    /** initialize your data structure here. */
     PriorityQueue<Integer> high;
     PriorityQueue<Integer> low;
 
+    /** initialize your data structure here. */
     public J41() {
-        high = new PriorityQueue<>(new Comparator<Integer>(){
-            public int compare (Integer o1, Integer o2) {
+        high = new PriorityQueue<Integer>(new Comparator<Integer>(){
+            public int compare(Integer o1, Integer o2) {
                 return o2 - o1;
             }
         });
-        low = new PriorityQueue<>(new Comparator<Integer> (){
-            public int compare (Integer o1, Integer o2) {
+        low = new PriorityQueue<Integer>(new Comparator<Integer>(){
+            public int compare(Integer o1, Integer o2) {
                 return o1 - o2;
             }
         });
@@ -30,28 +30,29 @@ public class J41 {
     public void addNum(int num) {
         if (high.size() == 0) {
             high.add(num);
-        }else if (num > high.peek()){
-            low.add(num);
-        }else {
-            high.add(num);
+            return;
         }
-
-        if (high.size() - 1 > low.size()){
-            low.add(high.poll());
-        }else if (high.size() + 1 < low.size()){
+        if (num <= high.peek()) {
+            high.add(num);
+        }else {
+            low.add(num);
+        }
+        while (low.size() > high.size()) {
             high.add(low.poll());
         }
-
+        while (high.size() > low.size() + 1) {
+            low.add(high.poll());
+        }
     }
 
     public double findMedian() {
         if (high.size() == 0) {
             return 0;
         }
-        if (high.size() == low.size()){
-            return (high.peek() + low.peek()) / 2.0;
+        if (low.size() != high.size()) {
+            return high.peek();
         }else {
-            return high.size() > low.size() ? high.peek() : low.peek();
+            return (high.peek() + low.peek()) / 2.0;
         }
     }
 }
