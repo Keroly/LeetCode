@@ -32,34 +32,33 @@ public class J36 {
         if (root == null) {
             return null;
         }
-        Stack<Node> stack  = new Stack<Node>();
-        Node cur = root;
-        Node pre = null;
-        Node head = root;
+        Stack<Node> stack = new Stack<>();
+        Node start = root;
         Node end = root;
-        while (head.left != null) {
-            head = head.left;
+        while (start.left != null) {
+            start = start.left;
         }
         while (end.right != null) {
             end = end.right;
         }
-        while (!stack.isEmpty() || cur != null) {
+        Node pre = end;
+        Node cur = root;
+        stack.push(root);
+        while(!stack.isEmpty() || cur != null) {
             if (cur != null) {
                 stack.push(cur);
                 cur = cur.left;
             }else {
                 Node node = stack.pop();
-                node.left = pre;
-                if (pre != null) {
-                    pre.right = node;
-                }
                 cur = node.right;
-                pre = node;
+                pre.right = node;
+                node.left = pre;
+                pre = pre.right;
+                if (node == end) {
+                    break;
+                }
             }
         }
-        head.left = end;
-        end.right = head;
-        return head;
+        return start;
     }
-
 }
