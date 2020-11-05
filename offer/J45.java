@@ -13,15 +13,15 @@ public class J45 {
     public String minNumber(int[] nums) {
         String res = "";
         ArrayList<Integer> list = new ArrayList<>();
-        for (Integer element : nums) {
-            list.add(element);
+        for (int i = 0; i < nums.length; i++) {
+            list.add(nums[i]);
         }
-        list.sort(new Comparator<Integer>(){
+        list.sort(new Comparator<Integer>() {
             public int compare(Integer o1, Integer o2) {
                 return (o1 + "" + o2).compareTo(o2 + "" + o1);
             }
         });
-        for (int i = 0; i < list.size(); i++){
+        for (int i = 0; i < nums.length; i++) {
             res += list.get(i);
         }
         return res;
