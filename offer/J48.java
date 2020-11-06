@@ -28,4 +28,5 @@ public class J48 {
         res = Math.max(res, str.length - start);
         return res;
     }
+
 }
