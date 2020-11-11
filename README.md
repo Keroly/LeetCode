@@ -1,11 +1,10 @@
 
-algorithm: 经典问题与算法   
+经典问题与算法   
 
-leetcode: LeetCode   
+LeetCode   
 
-offer: 《剑指offer》
+剑指offer
 
-行
 
    
 
