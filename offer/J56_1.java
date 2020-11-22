@@ -39,4 +39,5 @@ public class J56_1 {
         return result;
     }
 
+
 }
