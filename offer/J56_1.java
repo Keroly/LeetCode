@@ -38,5 +38,4 @@ public class J56_1 {
         result[1] = nums1;
         return result;
     }
-    
 }
