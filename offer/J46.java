@@ -7,6 +7,7 @@
  */
 
 public class J46 {
+    public static void main(String[] args) {
 
-
+    }
 }
