@@ -7,6 +7,4 @@
  */
 
 public class J46 {
-
-
 }
