@@ -8,16 +8,14 @@
 
 public class J03 {
     public int findRepeatNumber(int[] nums) {
-        for (int i = 0; i < nums.length; i++){
-            if (i != nums[i] && nums[nums[i]] != nums[i]){
-                int a = nums[i];
-                int b = nums[a];
-                nums[a] = a;
-                nums[i] = b;
-                i--;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != i && nums[nums[i]] != nums[i]) {
+                int temp = nums[nums[i]];
+                nums[nums[i]] = nums[i];
+                nums[i] = temp;
                 continue;
             }
-            if (i != nums[i]){
+            if (nums[i] != i) {
                 return nums[i];
             }
         }
