@@ -19,18 +19,15 @@ public class J06 {
     }
 
     public int[] reversePrint(ListNode head) {
-        Stack<ListNode> stack = new Stack<ListNode>();
-        ListNode cur = head;
-        int lens = 0;
-        while (cur != null) {
-            stack.push(cur);
-            cur = cur.next;
-            lens++;
+        Stack<Integer> stack = new Stack<>();
+        while (head != null) {
+            stack.push(head.val);
+            head = head.next;
         }
-        int[] ans = new int[lens];
-        int i = 0;
-        while (!stack.isEmpty()){
-            ans[i++] = stack.pop().val;
+        int[] ans = new int[stack.size()];
+        int flag = 0;
+        while (!stack.isEmpty()) {
+            ans[flag++] = stack.pop();
         }
         return ans;
     }
