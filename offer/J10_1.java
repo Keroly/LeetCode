@@ -13,7 +13,7 @@ public class J10_1 {
         }
         int a = 0;
         int b = 1;
-        while(n-- > 1){
+        while (n-- >= 2) {
             int sum = (a + b) % 1000000007;
             a = b;
             b = sum;
