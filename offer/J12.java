@@ -8,32 +8,34 @@
  */
 
 public class J12 {
-    public boolean dfs (char[][] board, int x, int y, String word, int index, int[][] flag) {
-        if (index == word.length()) {
-            return true;
-        }
-        if (x < 0 || y < 0 || x >= board.length || y >= board[0].length || board[x][y] != word.charAt(index) || flag[x][y] == 1) {
-            return false;
-        }
-        flag[x][y] = 1;
-        boolean res = dfs(board, x, y + 1, word, index + 1, flag) || dfs(board, x, y - 1, word, index + 1, flag) ||
-                dfs(board, x + 1, y, word, index + 1, flag) || dfs(board, x - 1, y, word, index + 1, flag);
-        flag[x][y] = 0;
-        return res;
-    }
-
     public boolean exist(char[][] board, String word) {
-        if (board == null || board[0].length == 0) {
+        if (board == null || board.length == 0) {
             return false;
         }
+        char[] chs = word.toCharArray();
         int[][] flag = new int[board.length][board[0].length];
         for (int x = 0; x < board.length; x++) {
             for (int y = 0; y < board[0].length; y++) {
-                if (dfs(board, x, y, word, 0, flag)) {
+                if (dfs(board, x, y, flag, chs, 0)) {
                     return true;
                 }
             }
         }
         return false;
     }
+
+    public boolean dfs(char[][] board, int x, int y, int[][] flag, char[] chs, int num) {
+        if (x >= board.length || x < 0 || y >= board[0].length || y < 0 || flag[x][y] == 1 || num >= chs.length || board[x][y] != chs[num]) {
+            return false;
+        }
+        if (num == chs.length - 1) {
+            return true;
+        }
+        flag[x][y] = 1;
+        boolean ans = dfs(board, x + 1, y, flag, chs, num + 1) || dfs(board, x - 1, y, flag, chs, num + 1) ||
+                dfs(board, x, y + 1, flag, chs, num + 1) || dfs(board, x, y - 1, flag, chs, num + 1);
+        flag[x][y] = 0;
+        return ans;
+    }
+
 }
