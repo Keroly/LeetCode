@@ -17,15 +17,14 @@ public class J24 {
         if (head == null || head.next == null) {
             return head;
         }
-        ListNode slow = head;
-        ListNode fast = head.next;
+        ListNode node = head.next;
         head.next = null;
-        while (fast != null) {
-            ListNode cur = fast.next;
-            fast.next = slow;
-            slow = fast;
-            fast = cur;
+        while (node != null) {
+            ListNode temp = node;
+            node = node.next;
+            temp.next = head;
+            head = node;
         }
-        return slow;
+        return head;
     }
 }
