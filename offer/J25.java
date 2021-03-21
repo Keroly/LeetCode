@@ -20,24 +20,30 @@ public class J25 {
         if (l2 == null) {
             return l1;
         }
-        ListNode node = new ListNode(-1);
-        ListNode cur = node;
+        ListNode head = l1;
+        l1 = l1.next;
+        if (l2.val < head.val) {
+            l1 = head;
+            head = l2;
+            l2 = l2.next;
+        }
+        ListNode root = head;
         while (l1 != null && l2 != null) {
-            if (l1.val >= l2.val) {
-                cur.next = l2;
-                l2 = l2.next;
-            }else {
-                cur.next = l1;
+            if (l1.val < l2.val) {
+                head.next = l1;
                 l1 = l1.next;
+            }else {
+                head.next = l2;
+                l2 = l2.next;
             }
-            cur = cur.next;
+            head = head.next;
         }
         if (l1 != null) {
-            cur.next = l1;
+            head.next = l1;
         }
         if (l2 != null) {
-            cur.next = l2;
+            head.next = l2;
         }
-        return node.next;
+        return root;
     }
 }
