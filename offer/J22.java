@@ -18,17 +18,19 @@ public class J22 {
         if (head == null) {
             return null;
         }
-        ListNode cur = head;
-        for (int i = k; i > 1; i--) {
-            cur = cur.next;
-            if (cur == null) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while (k-- > 1) {
+            if (fast.next != null) {
+                fast = fast.next;
+            }else {
                 return null;
             }
         }
-        while(cur.next != null) {
-            cur = cur.next;
-            head = head.next;
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
         }
-        return head;
+        return slow;
     }
 }
