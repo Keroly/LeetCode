@@ -21,22 +21,22 @@ public class J13 {
         }
         return i + j > k ? true : false;
     }
-    public int dfs (int x, int y, int m, int n, int k, int[][] flag){
-        if (x < 0 || y < 0 || x >= m || y >= n || cal(x, y, k) || flag[x][y] == 1) {
+
+    public int dfs(int m, int n, int x, int y, int[][] flag, int k) {
+        if (x < 0 || x == m || y < 0 || y == n || flag[x][y] == 1 || cal(x, y, k)) {
             return 0;
         }
-        int ans = 1;
         flag[x][y] = 1;
-        ans += dfs(x + 1, y, m, n, k, flag) + dfs(x - 1, y, m, n, k, flag) + dfs(x , y + 1, m, n, k, flag) +
-                dfs(x, y - 1, m, n, k, flag);
-        return ans;
+        int sum = dfs(m, n, x + 1, y, flag, k) + dfs(m, n, x, y + 1, flag, k);
+        return sum + 1;
     }
+
 
     public int movingCount(int m, int n, int k) {
         if (m <= 0 || n <= 0) {
             return 0;
         }
         int[][] flag = new int[m][n];
-        return dfs(0, 0, m, n, k, flag);
+        return dfs(m, n, 0, 0, flag, k);
     }
 }
