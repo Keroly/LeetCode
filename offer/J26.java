@@ -23,11 +23,11 @@ public class J26 {
         }
         return dfs(A.left, B.left) && dfs(A.right, B.right);
     }
+
     public boolean isSubStructure(TreeNode A, TreeNode B) {
         if (A == null || B == null ) {
             return false;
         }
-        boolean res = dfs(A, B);
-        return res || isSubStructure(A.left, B) || isSubStructure(A.right, B);
+        return dfs(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B);
     }
 }
