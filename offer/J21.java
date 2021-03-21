@@ -8,20 +8,21 @@
 
 public class J21 {
     public int[] exchange(int[] nums) {
-        if (nums == null || nums.length == 0) {
+        if (nums == null || nums.length < 2) {
             return nums;
         }
-        int left = 0;
-        int right = nums.length - 1;
-        while (left < right) {
-            if (nums[left] % 2 == 0) {
-                int temp = nums[right];
-                nums[right] = nums[left];
-                nums[left] = temp;
-                right--;
-            }else {
-                left++;
+        int i = 0;
+        int j = nums.length - 1;
+        while (i < j) {
+            while (nums[i] % 2 == 1 && i < j) {
+                i++;
             }
+            while (nums[j] % 2 == 0 & i < j) {
+                j--;
+            }
+            int temp = nums[i];
+            nums[i++] = nums[j];
+            nums[j--] = temp;
         }
         return nums;
     }
