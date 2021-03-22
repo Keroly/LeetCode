@@ -23,6 +23,7 @@ public class J28 {
         }
         return dfs(left.left, right.right) && dfs(left.right, right.left);
     }
+
     public boolean isSymmetric(TreeNode root) {
         if (root == null) {
             return true;
