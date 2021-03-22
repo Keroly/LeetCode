@@ -12,39 +12,39 @@ public class J29 {
         if (matrix == null || matrix.length == 0) {
             return new int[0];
         }
-        int i = 0;
-        int j = 0;
-        int m = 0;
         int x = matrix.length;
         int y = matrix[0].length;
-        int[] res = new int[x * y];
+        int[] ans = new int[x * y];
+        int m = 0;
+        int n = 0;
+        int flag = 0;
         while (x > 0 && y > 0) {
             while (x == 1 && y-- > 0) {
-                res[m++] = matrix[i][j++];
+                ans[flag++] = matrix[m][n++];
             }
             while (y == 1 && x-- > 0) {
-                res[m++] = matrix[i++][j];
+                ans[flag++] = matrix[m++][n];
             }
-            if (x <= 0 || y <= 0) {
-                break;
+            if (x == 1 || y == 1) {
+                return ans;
             }
-            for (int p = j; p < j + y - 1; p++) {
-                res[m++] = matrix[i][p];
+            for (int i = n; i < n + y - 1; i++) {
+                ans[flag++] = matrix[m][i];
             }
-            for (int p = i; p < i + x - 1; p++) {
-                res[m++] = matrix[p][j + y - 1];
+            for (int i = m; i < m + x - 1; i++) {
+                ans[flag++] = matrix[i][n + y - 1];
             }
-            for (int p = j + y - 1; p > j; p--) {
-                res[m++] = matrix[i + x - 1][p];
+            for (int i = n + y - 1; i > n; i--) {
+                ans[flag++] = matrix[m + x - 1][i];
             }
-            for (int p = i + x - 1; p > i; p--) {
-                res[m++] = matrix[p][j];
+            for (int i = m + x - 1; i > m; i--) {
+                ans[flag++] = matrix[i][n];
             }
-            x -= 2;
-            y -= 2;
-            i++;
-            j++;
+            x = x - 2;
+            y = y - 2;
+            m++;
+            n++;
         }
-        return res;
+        return ans;
     }
 }
