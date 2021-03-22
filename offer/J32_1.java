@@ -8,6 +8,7 @@
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class J32_1 {
     public class TreeNode {
@@ -21,26 +22,26 @@ public class J32_1 {
         if (root == null) {
             return new int[0];
         }
-        LinkedList<TreeNode> list = new LinkedList<TreeNode>();
-        ArrayList<Integer> res = new ArrayList<Integer>();
+        ArrayList<Integer> ans = new ArrayList<>();
+        LinkedList<TreeNode> list = new LinkedList<>();
         list.add(root);
-        while (list.size() > 0) {
+        while (!list.isEmpty()) {
             int lens = list.size();
             for (int i = 0; i < lens; i++) {
-                TreeNode cur = list.pollFirst();
-                res.add(cur.val);
-                if (cur.left != null) {
-                    list.addLast(cur.left);
+                TreeNode node = list.poll();
+                if (node.left != null) {
+                    list.add(node.left);
                 }
-                if (cur.right != null) {
-                    list.addLast(cur.right);
+                if (node.right != null) {
+                    list.add(node.right);
                 }
+                ans.add(node.val);
             }
         }
-        int[] ans = new int[res.size()];
-        for (int i = 0; i < res.size(); i++) {
-            ans[i] = res.get(i);
+        int[] res = new int[ans.size()];
+        for (int i = 0; i < ans.size(); i++) {
+            res[i] = ans.get(i);
         }
-        return ans;
+        return res;
     }
 }
