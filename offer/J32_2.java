@@ -7,6 +7,7 @@
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,27 +20,28 @@ public class J32_2 {
     }
 
     public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
-        LinkedList<TreeNode>  linkedList = new LinkedList<TreeNode>();
         if (root == null) {
-            return res;
+            return new ArrayList<>();
         }
-        linkedList.add(root);
-        while (linkedList.size() > 0) {
-            int size = linkedList.size();
-            List<Integer>  arrayList = new ArrayList<>();
+        LinkedList<List<Integer>> ans = new LinkedList<>();
+        LinkedList<TreeNode> l1 = new LinkedList<>();
+        LinkedList<Integer> l2 = new LinkedList<>();
+        l1.add(root);
+        while (!l1.isEmpty()) {
+            int size = l1.size();
             for (int i = 0; i < size; i++) {
-                TreeNode node = linkedList.pollFirst();
-                arrayList.add(node.val);
+                TreeNode node = l1.poll();
                 if (node.left != null) {
-                    linkedList.add(node.left);
+                    l1.add(node.left);
                 }
                 if (node.right != null) {
-                    linkedList.add(node.right);
+                    l1.add(node.right);
                 }
+                l2.add(node.val);
             }
-            res.add(arrayList);
+            ans.add(new ArrayList<>(l2));
+            l2.clear();
         }
-        return res;
+        return ans;
     }
 }
