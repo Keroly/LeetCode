@@ -9,7 +9,6 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 
 public class J32_3 {
     public class TreeNode {
@@ -20,44 +19,45 @@ public class J32_3 {
     }
 
     public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
         if (root == null) {
-            return res;
+            return new LinkedList<List<Integer>>();
         }
 
-        LinkedList<TreeNode> linkedList = new LinkedList<>();
-        linkedList.add(root);
-        int flag = 1;
+        List<List<Integer>> ans = new LinkedList<>();
+        LinkedList<TreeNode> list = new LinkedList<>();
+        LinkedList<Integer> res = new LinkedList<>();
+        list.add(root);
+        int flag = 0;
 
-        while (linkedList.size() > 0) {
-            List<Integer> list = new LinkedList<Integer>();
-            int size = linkedList.size();
+        while (!list.isEmpty()) {
+            int size = list.size();
             if (flag % 2 == 0) {
-                while (size-- > 0) {
-                    TreeNode node = linkedList.pollLast();
-                    list.add(node.val);
-                    if (node.right != null) {
-                        linkedList.addFirst(node.right);
-                    }
+                for (int i = 0; i < size; i++) {
+                    TreeNode node = list.poll();
                     if (node.left != null) {
-                        linkedList.addFirst(node.left);
+                        list.add(node.left);
                     }
+                    if (node.right != null) {
+                        list.add(node.right);
+                    }
+                    res.add(node.val);
                 }
             }else {
-                while (size-- > 0) {
-                    TreeNode node = linkedList.pollFirst();
-                    list.add(node.val);
-                    if (node.left != null) {
-                        linkedList.addLast(node.left);
-                    }
+                for (int i = 0; i < size; i++) {
+                    TreeNode node = list.pollLast();
                     if (node.right != null) {
-                        linkedList.addLast(node.right);
+                        list.addFirst(node.right);
                     }
+                    if (node.left != null) {
+                        list.addFirst(node.left);
+                    }
+                    res.add(node.val);
                 }
             }
-            res.add(list);
+            ans.add(new LinkedList<>(res));
+            res.clear();
             flag++;
         }
-        return res;
+        return ans;
     }
 }
