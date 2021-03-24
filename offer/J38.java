@@ -6,8 +6,8 @@
 
  */
 
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 public class J38 {
     public void swap(char[] arr, int i, int j) {
@@ -15,29 +15,35 @@ public class J38 {
         arr[i] = arr[j];
         arr[j] = temp;
     }
-    public void dfs(char[] arr, int index, ArrayList<String> res) {
-        if (index == arr.length - 1) {
-            res.add(new String(arr));
-            return;
-        }
-        HashSet set = new HashSet();
-        for (int i = index; i < arr.length; i++) {
-            if (!set.contains(arr[i])) {
-                set.add(arr[i]);
-                swap(arr, i, index);
-                dfs(arr, index + 1, res);
-                swap(arr, i, index);
-            }
-        }
-    }
+
     public String[] permutation(String s) {
-        char[] arr = s.toCharArray();
-        ArrayList<String> res = new ArrayList<String>();
-        dfs(arr, 0, res);
-        String[] ans = new String[res.size()];
-        for (int i = 0; i < res.size(); i++) {
-            ans[i] = res.get(i);
+        if (s == null || s == "") {
+            return new String[0];
+        }
+        LinkedList<String> list = new LinkedList<>();
+        char[] chs = s.toCharArray();
+        dfs(list, chs, 0);
+        int size = list.size();
+        String[] ans = new String[size];
+        for (int i = 0; i < size; i++) {
+            ans[i] = list.poll();
         }
         return ans;
+    }
+
+    private void dfs(LinkedList<String> list, char[] chs, int num) {
+        if (num == chs.length - 1) {
+            list.add(String.valueOf(chs));
+            return;
+        }
+        HashSet<Character> set = new HashSet<>();
+        for (int i = num; i < chs.length; i++) {
+            if (!set.contains(chs[i])) {
+                set.add(chs[i]);
+                swap(chs, num, i);
+                dfs(list, chs, num + 1);
+                swap(chs, num, i);
+            }
+        }
     }
 }
