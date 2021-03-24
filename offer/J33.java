@@ -11,20 +11,20 @@ public class J33 {
         if (left >= right) {
             return true;
         }
-        int target = postorder[right];
-        int flag = right - 1;
+        int flag = postorder[right];
+        int temp = right;
         for (int i = left; i < right; i++) {
-            if (postorder[i] > target) {
-                flag = i - 1;
+            if (postorder[i] > postorder[right]) {
+                temp = i;
                 break;
             }
         }
-        for (int i = flag + 1; i < right; i++) {
-            if (postorder[i] < target) {
+        for (int i = temp; i < right; i++) {
+            if (postorder[i] < postorder[right]) {
                 return false;
             }
         }
-        return dfs(postorder, left, flag) && dfs(postorder, flag + 1, right - 1);
+        return dfs(postorder, left, temp - 1) && dfs(postorder, temp, right - 1);
     }
 
     public boolean verifyPostorder(int[] postorder) {
