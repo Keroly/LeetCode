@@ -11,6 +11,7 @@
 // f(n) - f(n - 1) = f(n - 1)
 // f(n) = 2 f(n - 1) = 4 f(n - 2) = 8 f(n - 3) = 2 ^ (n - 1) f(1) = 2 ^ (n - 1)
 
+
 public class J10_3 {
     public int JumpFloorII(int target) {
         return (int)Math.pow(2, target -1);
