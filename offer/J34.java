@@ -26,33 +26,27 @@ public class J34 {
             return new LinkedList<>();
         }
         List<List<Integer>> ans = new LinkedList<>();
-        LinkedList<TreeNode> temp = new LinkedList<>();
         LinkedList<Integer> res = new LinkedList<>();
-        temp.add(root);
         res.add(root.val);
-        dfs(ans, temp, res, root.val, sum);
+        dfs(ans, root, res, root.val, sum);
         return ans;
     }
 
-    private void dfs(List<List<Integer>> ans, LinkedList<TreeNode> temp, LinkedList<Integer> res, int val, int sum) {
-        TreeNode node = temp.peekLast();
+    private void dfs(List<List<Integer>> ans, TreeNode root, LinkedList<Integer> res, int val, int sum) {
+        TreeNode node = root;
         if (node.left == null && node.right == null && val == sum) {
             ans.add(new ArrayList<>(res));
         }
 
         if (node.left != null) {
-            temp.add(node.left);
             res.add(node.left.val);
-            dfs(ans, temp, res, val + node.left.val, sum);
-            temp.pollLast();
+            dfs(ans, node.left, res, val + node.left.val, sum);
             res.pollLast();
         }
 
         if (node.right != null) {
-            temp.add(node.right);
             res.add(node.right.val);
-            dfs(ans, temp, res, val + node.right.val, sum);
-            temp.pollLast();
+            dfs(ans, node.right, res, val + node.right.val, sum);
             res.pollLast();
         }
     }
