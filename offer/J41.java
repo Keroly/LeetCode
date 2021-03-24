@@ -28,31 +28,24 @@ public class J41 {
     }
 
     public void addNum(int num) {
-        if (high.size() == 0) {
+        if (high.size() == low.size()) {
             high.add(num);
-            return;
-        }
-        if (num <= high.peek()) {
-            high.add(num);
+            low.add(high.poll());
         }else {
             low.add(num);
-        }
-        while (low.size() > high.size()) {
             high.add(low.poll());
-        }
-        while (high.size() > low.size() + 1) {
-            low.add(high.poll());
         }
     }
 
     public double findMedian() {
-        if (high.size() == 0) {
-            return 0;
-        }
-        if (low.size() != high.size()) {
-            return high.peek();
-        }else {
+        if (high.size() == low.size()) {
             return (high.peek() + low.peek()) / 2.0;
+        }else {
+            if (high.size() > low.size()) {
+                return high.peek();
+            }else {
+                return low.peek();
+            }
         }
     }
 }
