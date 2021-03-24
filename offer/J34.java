@@ -6,6 +6,7 @@
 
  */
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,27 +20,40 @@ public class J34 {
             this.val = val;
         }
     }
-    List<List<Integer>> res = new LinkedList<>();
-    LinkedList<Integer> list = new LinkedList<>();
-    public void dfs(TreeNode root, int sum) {
-        if (root == null) {
-            return;
-        }
-        list.add(root.val);
-        sum -= root.val;
-        if (root.left == null && root.right == null && sum == 0) {
-            res.add(new LinkedList<>(list));
-        }
-        dfs(root.left, sum);
-        dfs(root.right,sum);
-        list.pollLast();
-    }
+
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
         if (root == null) {
-            return res;
+            return new LinkedList<>();
         }
-        dfs(root, sum);
-        return res;
+        List<List<Integer>> ans = new LinkedList<>();
+        LinkedList<TreeNode> temp = new LinkedList<>();
+        LinkedList<Integer> res = new LinkedList<>();
+        temp.add(root);
+        res.add(root.val);
+        dfs(ans, temp, res, root.val, sum);
+        return ans;
     }
 
+    private void dfs(List<List<Integer>> ans, LinkedList<TreeNode> temp, LinkedList<Integer> res, int val, int sum) {
+        TreeNode node = temp.peekLast();
+        if (node.left == null && node.right == null && val == sum) {
+            ans.add(new ArrayList<>(res));
+        }
+
+        if (node.left != null) {
+            temp.add(node.left);
+            res.add(node.left.val);
+            dfs(ans, temp, res, val + node.left.val, sum);
+            temp.pollLast();
+            res.pollLast();
+        }
+
+        if (node.right != null) {
+            temp.add(node.right);
+            res.add(node.right.val);
+            dfs(ans, temp, res, val + node.right.val, sum);
+            temp.pollLast();
+            res.pollLast();
+        }
+    }
 }
