@@ -9,13 +9,17 @@
 
 public class J42 {
     public int maxSubArray(int[] nums) {
-        int res = Integer.MIN_VALUE;
+        int ans = Integer.MIN_VALUE;
         int sum = 0;
         for (int i = 0; i < nums.length; i++) {
-            int now = Math.max(sum, 0) + nums[i];
-            res = Math.max(res, now);
-            sum = now;
+            if (sum < 0) {
+                sum = 0;
+                i--;
+            }else {
+                sum += nums[i];
+                ans = Math.max(ans, sum);
+            }
         }
-        return res;
+        return ans;
     }
 }
