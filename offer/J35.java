@@ -20,51 +20,42 @@ public class J35 {
     }
 
     public void copy(Node head){
-        Node cur = head;
-        while (cur != null) {
-            Node node = new Node(cur.val);
-            node.next = cur.next;
-            cur.next = node;
-            cur = node.next;
+        Node node = head;
+        while (node != null) {
+            Node copyNode = new Node(node.val);
+            copyNode.next = node.next;
+            node.next = copyNode;
+            node = copyNode.next;
         }
     }
 
     public void copyRandom(Node head) {
-        if (head == null || head.next == null) {
-            return;
-        }
-        Node slow = head;
-        Node fast = head.next;
-        while (slow != null) {
-            if (slow.random != null) {
-                fast.random = slow.random.next;
+        Node node = head;
+        while (node != null) {
+            if (node.random != null) {
+                node.next.random = node.random.next;
             }
-            if (fast.next == null) {
-                return;
-            }
-            fast = fast.next.next;
-            slow = slow.next.next;
+            node = node.next.next;
         }
     }
 
     public Node split (Node head) {
-        if (head == null) {
-            return null;
+        Node res = head.next;
+        Node node = res;
+        while (node.next != null) {
+            head.next = node.next;
+            node.next = node.next.next;
+            node = node.next;
+            head = head.next;
         }
-        Node slow = head;
-        Node fast = head.next;
-        Node res = fast;
-        while (fast.next != null) {
-            slow.next = fast.next;
-            fast.next = fast.next.next;
-            slow = slow.next;
-            fast = fast.next;
-        }
-        slow.next = null;
+        head.next = null;
         return res;
     }
 
     public Node copyRandomList(Node head) {
+        if (head == null) {
+            return head;
+        }
         copy(head);
         copyRandom(head);
         return split(head);
