@@ -11,14 +11,13 @@ import java.util.Stack;
 
 public class J31 {
     public boolean validateStackSequences(int[] pushed, int[] popped) {
-        Stack<Integer> stack = new Stack<Integer>();
-        int j = 0;
-        int lens = pushed.length;
-        for (int k = 0; k < lens; k++) {
-            stack.push(pushed[k]);
-            while (!stack.isEmpty() && stack.peek() == popped[j]) {
+        Stack<Integer> stack = new Stack<>();
+        int flag = 0;
+        for (int i = 0; i < popped.length; i++) {
+            stack.add(pushed[i]);
+            while (!stack.isEmpty() && stack.peek() == popped[flag]) {
                 stack.pop();
-                j++;
+                flag++;
             }
         }
         if (stack.isEmpty()) {
