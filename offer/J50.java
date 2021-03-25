@@ -6,15 +6,18 @@
 
  */
 
+
+import java.util.HashMap;
+
 public class J50 {
     public char firstUniqChar(String s) {
-        char[] chars = s.toCharArray();
-        int[]count = new int[256];
-        for (char element : chars){
-            count[element]++;
+        char[] chs = s.toCharArray();
+        int[] all = new int[256];
+        for (Character element: chs) {
+            all[element]++;
         }
-        for (char element : chars){
-            if (count[element] == 1){
+        for (Character element: chs) {
+            if (all[element] == 1) {
                 return element;
             }
         }
