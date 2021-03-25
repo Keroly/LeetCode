@@ -16,30 +16,27 @@ public class J55_2 {
         }
     }
 
-    public int process(TreeNode root){
-        if (root == null){
+    public int dfs(TreeNode root){
+        if (root == null) {
             return 0;
         }
-
-        int left = process(root.left);
-        if (left == -1){
-            return  -1;
-        }
-
-        int right = process(root.right);
-        if (right == -1){
-            return  -1;
-        }
-
-        if (Math.abs(left - right) > 1){
+        int left = dfs(root.left);
+        int right = dfs(root.right);
+        if (left == -1 || right == -1) {
             return -1;
         }
-        return Math.max(left, right) + 1;
+        if (Math.abs(left - right) <= 1) {
+            return Math.max(left, right) + 1;
+        }
+        return -1;
     }
 
+
     public boolean isBalanced(TreeNode root) {
-        int isBalancedTree = process(root);
-        if(isBalancedTree < 0){
+        if (root == null) {
+            return true;
+        }
+        if (dfs(root) < 0 ) {
             return false;
         }
         return true;
