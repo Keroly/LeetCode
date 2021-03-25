@@ -6,9 +6,6 @@
 
  */
 
-
-import java.util.HashMap;
-
 public class J50 {
     public char firstUniqChar(String s) {
         char[] chs = s.toCharArray();
