@@ -23,42 +23,44 @@ public class J52 {
     }
 
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        if (headA != null && headB != null) {
-            int headALens = 0;
-            int headBLens = 0;
-            int abs = 0;
-            ListNode p_headA = headA;
-            ListNode p_headB = headB;
-            ListNode p_longest = headA;
-            ListNode p_shortest = headB;
-
-            while(p_headA != null){
-                headALens++;
-                p_headA = p_headA.next;
-            }
-            while(p_headB != null){
-                headBLens++;
-                p_headB = p_headB.next;
-            }
-
-            if(headALens < headBLens){
-                p_longest = headB;
-                p_shortest = headA;
-            }
-
-            abs = Math.abs(headALens - headBLens);
-            for(int i = 0; i < abs; i++){
-                p_longest = p_longest.next;
-            }
-
-            while(p_longest != null && p_shortest != null){
-                if(p_longest == p_shortest){
-                    return p_longest;
-                }
-                p_longest = p_longest.next;
-                p_shortest = p_shortest.next;
-            }
+        if (headA == null || headB == null) {
+            return null;
         }
+
+        int lens_A = 0;
+        int lens_B = 0;
+        ListNode flag_A = headA;
+        ListNode flag_B = headB;
+        while (flag_A != null) {
+            lens_A++;
+            flag_A = flag_A.next;
+        }
+        while (flag_B != null) {
+            lens_B++;
+            flag_B = flag_B.next;
+        }
+
+        flag_A = headA;
+        flag_B = headB;
+        int gap = lens_A - lens_B;
+
+        if (lens_B > lens_A) {
+            flag_A = headB;
+            flag_B = headA;
+            gap = lens_B - lens_A;
+        }
+
+        for (int i = 0; i < gap; i++) {
+            flag_A = flag_A.next;
+        }
+        while (flag_A != null) {
+            if (flag_A == flag_B) {
+                return flag_A;
+            }
+            flag_A = flag_A.next;
+            flag_B = flag_B.next;
+        }
+
         return null;
     }
 }
