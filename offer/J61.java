@@ -11,18 +11,18 @@ import java.util.HashSet;
 public class J61 {
     public boolean isStraight(int[] nums) {
         HashSet<Integer> set = new HashSet<>();
-        int max = 0;
-        int min = 15;
-        for (Integer element : nums){
-            if (element == 0) {
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
                 continue;
-            }else if (set.contains(element)){
-                return false;
-            }else {
-                max = Math.max(max, element);
-                min = Math.min(min, element);
-                set.add(element);
             }
+            if (set.contains(nums[i])) {
+                return false;
+            }
+            set.add(nums[i]);
+            max = Math.max(max, nums[i]);
+            min = Math.min(min, nums[i]);
         }
         if (max - min < 5) {
             return true;
