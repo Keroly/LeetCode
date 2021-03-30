@@ -7,35 +7,32 @@
  */
 
 public class J56_1 {
-    public int searchFirstOne(int num){
-        int flag = 1;
-        while (flag != 0){
-            if ((num & flag) != 0){
-                return flag;
-            }
-            flag <<= 1;
-        }
-        return flag;
-    }
 
     public int[] singleNumbers(int[] nums) {
-        int[] result = new int[2];
-        int nums0 = 0;
-        int nums1 = 0;
-        int flag = 0;
-        for(int element : nums){
-            flag ^= element;
+        int a = 0;
+        for (int i = 0; i < nums.length; i++) {
+            a ^= nums[i];
         }
-        flag = searchFirstOne(flag);
-        for (int element : nums){
-            if ((element & flag) == 0){
-                nums0 ^= element;
+
+        int b = 1;
+        while (b != 0) {
+            if ((a & b) != 0) {
+                break;
+            }
+            b <<= 1;
+        }
+
+        int res1 = 0;
+        int res2 = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            if ((nums[i] & b) == 0) {
+                res1 ^= nums[i];
             }else {
-                nums1 ^= element;
+                res2 ^= nums[i];
             }
         }
-        result[0] = nums0;
-        result[1] = nums1;
-        return result;
+
+        return new int[]{res1, res2};
     }
 }
