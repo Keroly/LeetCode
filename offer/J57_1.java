@@ -8,23 +8,17 @@
 
 public class J57_1 {
     public int[] twoSum(int[] nums, int target) {
-        int[] result = new int[2];
-        if (nums == null || nums.length < 2){
-            return result;
-        }
-        int i = 0;
-        int j = nums.length - 1;
-        while (i < j){
-            if (nums[i] + nums[j] < target){
-                i++;
-            }else if (nums[i] + nums[j] > target){
-                j--;
+        int left = 0;
+        int right = nums.length - 1;
+        while (left < right) {
+            if (nums[left] + nums[right] == target) {
+                return new int[]{nums[left], nums[right]};
+            }else if (nums[left] + nums[right] < target) {
+                left++;
             }else {
-                result[0] = nums[i];
-                result[1] = nums[j];
-                break;
+                right--;
             }
         }
-        return result;
+        return new int[2];
     }
 }
