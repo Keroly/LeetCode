@@ -8,23 +8,23 @@
 
 public class J66 {
     public int[] constructArr(int[] a) {
-        int[] res = new int[a.length];
-        if (a.length == 0) {
-            return res;
+        if (a == null || a.length == 0) {
+            return a;
         }
-        int[] nums1 = new int[a.length];
-        int[] nums2 = new int[a.length];
-        nums1[0] = 1;
-        nums2[a.length - 1] = 1;
-        for (int i = 1; i < a.length; i++){
-            nums1[i] = nums1[i - 1] * a[i - 1];
+        int[] lower = new int[a.length];
+        int[] upper = new int[a.length];
+        int[] ans = new int[a.length];
+        lower[0] = 1;
+        upper[a.length - 1] = 1;
+        for (int i = 0; i < a.length - 1; i++) {
+            lower[i + 1] = lower[i] * a[i];
         }
-        for (int i = a.length - 2; i >= 0; i--){
-            nums2[i] = nums2[i + 1] * a[i + 1];
+        for (int i = a.length - 1; i > 0; i--) {
+            upper[i - 1] = upper[i] * a[i];
         }
-        for(int i = 0; i < a.length; i++){
-            res[i] = nums1[i] * nums2[i];
+        for (int i = 0; i < a.length; i++) {
+            ans[i] = lower[i] * upper[i];
         }
-        return res;
+        return ans;
     }
 }
