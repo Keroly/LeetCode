@@ -11,6 +11,7 @@ import java.util.Comparator;
 
 public class J45 {
     public String minNumber(int[] nums) {
+
         String res = "";
         ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < nums.length; i++) {
