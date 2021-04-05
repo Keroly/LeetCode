@@ -10,27 +10,22 @@
 import java.util.LinkedList;
 
 public class J59_2 {
-    public int[] maxSlidingWindow(int[] nums, int k) {
-        if (nums.length == 0){
-            return nums;
-        }
-        int cur = 0;
-        LinkedList<Integer> list = new LinkedList<>();
-        int[] result = new int[nums.length - k + 1];
 
-        for (int i = 0; i < nums.length; i++){
-            while (!list.isEmpty() && nums[i] > nums[list.peekLast()]){
-                list.pollLast();
-            }
-            list.addLast(i);
-            if (i < k - 1){
-                continue;
-            }
-            result[cur++] = nums[list.peekFirst()];
-            if (list.peekFirst() <= i - k + 1){
-                list.pollFirst();
-            }
-        }
-        return result;
+
+
+    public J59_2() {
+
+    }
+
+    public int max_value() {
+        return -1;
+    }
+
+    public void push_back(int value) {
+
+    }
+
+    public int pop_front() {
+        return -1;
     }
 }
