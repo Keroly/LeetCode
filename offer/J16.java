@@ -11,17 +11,31 @@ public class J16 {
         if (n == 0) {
             return 1;
         }
-        double res = cal(x, n / 2);
-        if (n % 2 == 1) {
-            return res * res * x;
-        }else {
-            return res * res;
+        if (n == 1) {
+            return x;
         }
+        if (n == 2) {
+            return x * x;
+        }
+
+        double res = cal(x, n / 2);
+        if (n % 2 == 0) {
+            return res * res;
+        }else {
+            return x * res * res;
+        }
+
     }
     public double myPow(double x, int n) {
+
+        int flag = n > 0 ? n : 0 - n;
+
+        double ans = cal(x, n);
+
         if (n > 0) {
-            return cal(x, -n);
+            return ans;
         }
-        return 1 / cal(x, n);
+
+        return 1 / ans;
     }
 }
